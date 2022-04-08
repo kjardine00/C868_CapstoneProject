@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using C868.Models;
 
 namespace C868
 {
     public partial class OrderForm : Form
     {
-        public OrderForm()
+        public OrderForm(bool isNew, Order order)
         {
             InitializeComponent();
         }

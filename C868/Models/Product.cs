@@ -8,7 +8,7 @@ using SQLite;
 namespace C868.Models
 {
     [Table("Product")]
-    class Product
+    public class Product
     {
         [PrimaryKey, AutoIncrement]
         int ProdID { get; set; }

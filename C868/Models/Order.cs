@@ -8,7 +8,7 @@ using SQLite;
 namespace C868.Models
 {
     [Table("Order")]
-    class Order
+    public class Order
     {
         int OrderId { get; set; }
         string CustName { get; set; }

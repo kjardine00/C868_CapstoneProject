@@ -34,18 +34,21 @@ namespace C868
             this.OrdersTab = new System.Windows.Forms.TabPage();
             this.UpdateOrderBtn = new System.Windows.Forms.Button();
             this.NewOrderBtn = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.OrdersDGV = new System.Windows.Forms.DataGridView();
             this.InventoryTab = new System.Windows.Forms.TabPage();
             this.UpdateProdBtn = new System.Windows.Forms.Button();
             this.NewProdBtn = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.InventoryDGV = new System.Windows.Forms.DataGridView();
             this.ExitBtn = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.SearchBtn = new System.Windows.Forms.Button();
+            this.SearchText = new System.Windows.Forms.TextBox();
+            this.ReportsTab = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.OrdersTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.OrdersDGV)).BeginInit();
             this.InventoryTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.InventoryDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,6 +56,7 @@ namespace C868
             // 
             this.tabControl1.Controls.Add(this.OrdersTab);
             this.tabControl1.Controls.Add(this.InventoryTab);
+            this.tabControl1.Controls.Add(this.ReportsTab);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.tabControl1.Location = new System.Drawing.Point(0, 77);
@@ -65,7 +69,7 @@ namespace C868
             // 
             this.OrdersTab.Controls.Add(this.UpdateOrderBtn);
             this.OrdersTab.Controls.Add(this.NewOrderBtn);
-            this.OrdersTab.Controls.Add(this.dataGridView1);
+            this.OrdersTab.Controls.Add(this.OrdersDGV);
             this.OrdersTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.OrdersTab.Location = new System.Drawing.Point(4, 33);
             this.OrdersTab.Name = "OrdersTab";
@@ -95,20 +99,25 @@ namespace C868
             this.NewOrderBtn.UseVisualStyleBackColor = true;
             this.NewOrderBtn.Click += new System.EventHandler(this.NewOrderBtn_Click);
             // 
-            // dataGridView1
+            // OrdersDGV
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1145, 441);
-            this.dataGridView1.TabIndex = 0;
+            this.OrdersDGV.AllowUserToAddRows = false;
+            this.OrdersDGV.AllowUserToDeleteRows = false;
+            this.OrdersDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.OrdersDGV.Dock = System.Windows.Forms.DockStyle.Top;
+            this.OrdersDGV.Location = new System.Drawing.Point(3, 3);
+            this.OrdersDGV.MultiSelect = false;
+            this.OrdersDGV.Name = "OrdersDGV";
+            this.OrdersDGV.RowHeadersVisible = false;
+            this.OrdersDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.OrdersDGV.Size = new System.Drawing.Size(1145, 441);
+            this.OrdersDGV.TabIndex = 0;
             // 
             // InventoryTab
             // 
             this.InventoryTab.Controls.Add(this.UpdateProdBtn);
             this.InventoryTab.Controls.Add(this.NewProdBtn);
-            this.InventoryTab.Controls.Add(this.dataGridView2);
+            this.InventoryTab.Controls.Add(this.InventoryDGV);
             this.InventoryTab.Location = new System.Drawing.Point(4, 33);
             this.InventoryTab.Name = "InventoryTab";
             this.InventoryTab.Padding = new System.Windows.Forms.Padding(3);
@@ -137,21 +146,28 @@ namespace C868
             this.NewProdBtn.UseVisualStyleBackColor = true;
             this.NewProdBtn.Click += new System.EventHandler(this.NewProdBtn_Click);
             // 
-            // dataGridView2
+            // InventoryDGV
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dataGridView2.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(1145, 439);
-            this.dataGridView2.TabIndex = 4;
+            this.InventoryDGV.AllowUserToAddRows = false;
+            this.InventoryDGV.AllowUserToDeleteRows = false;
+            this.InventoryDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.InventoryDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.InventoryDGV.Dock = System.Windows.Forms.DockStyle.Top;
+            this.InventoryDGV.Location = new System.Drawing.Point(3, 3);
+            this.InventoryDGV.MultiSelect = false;
+            this.InventoryDGV.Name = "InventoryDGV";
+            this.InventoryDGV.ReadOnly = true;
+            this.InventoryDGV.RowHeadersVisible = false;
+            this.InventoryDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.InventoryDGV.Size = new System.Drawing.Size(1145, 439);
+            this.InventoryDGV.TabIndex = 4;
             // 
             // ExitBtn
             // 
-            this.ExitBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.ExitBtn.Location = new System.Drawing.Point(1024, 12);
+            this.ExitBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.ExitBtn.Location = new System.Drawing.Point(1052, 16);
             this.ExitBtn.Name = "ExitBtn";
-            this.ExitBtn.Size = new System.Drawing.Size(123, 37);
+            this.ExitBtn.Size = new System.Drawing.Size(95, 26);
             this.ExitBtn.TabIndex = 1;
             this.ExitBtn.Text = "Exit";
             this.ExitBtn.UseVisualStyleBackColor = true;
@@ -167,23 +183,55 @@ namespace C868
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
+            // SearchBtn
+            // 
+            this.SearchBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.SearchBtn.Location = new System.Drawing.Point(951, 16);
+            this.SearchBtn.Name = "SearchBtn";
+            this.SearchBtn.Size = new System.Drawing.Size(95, 26);
+            this.SearchBtn.TabIndex = 4;
+            this.SearchBtn.Text = "Search";
+            this.SearchBtn.UseVisualStyleBackColor = true;
+            // 
+            // SearchText
+            // 
+            this.SearchText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.SearchText.Location = new System.Drawing.Point(698, 16);
+            this.SearchText.Name = "SearchText";
+            this.SearchText.Size = new System.Drawing.Size(247, 26);
+            this.SearchText.TabIndex = 5;
+            // 
+            // ReportsTab
+            // 
+            this.ReportsTab.Location = new System.Drawing.Point(4, 33);
+            this.ReportsTab.Name = "ReportsTab";
+            this.ReportsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.ReportsTab.Size = new System.Drawing.Size(1151, 506);
+            this.ReportsTab.TabIndex = 2;
+            this.ReportsTab.Text = "Reports";
+            this.ReportsTab.UseVisualStyleBackColor = true;
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1159, 620);
+            this.Controls.Add(this.SearchText);
+            this.Controls.Add(this.SearchBtn);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ExitBtn);
             this.Controls.Add(this.tabControl1);
             this.Name = "Dashboard";
             this.Text = "Skin Strategy Inventory Manager";
+            this.Load += new System.EventHandler(this.Dashboard_Load);
             this.tabControl1.ResumeLayout(false);
             this.OrdersTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.OrdersDGV)).EndInit();
             this.InventoryTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.InventoryDGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -195,11 +243,14 @@ namespace C868
         private System.Windows.Forms.Button ExitBtn;
         private System.Windows.Forms.Button UpdateOrderBtn;
         private System.Windows.Forms.Button NewOrderBtn;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView OrdersDGV;
         private System.Windows.Forms.Button UpdateProdBtn;
         private System.Windows.Forms.Button NewProdBtn;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView InventoryDGV;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button SearchBtn;
+        private System.Windows.Forms.TextBox SearchText;
+        private System.Windows.Forms.TabPage ReportsTab;
     }
 }
 

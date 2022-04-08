@@ -8,7 +8,7 @@ using SQLite;
 namespace C868.Models
 {
     [Table("OrderItems")]
-    class OrderItems
+    public class OrderItems
     {
         [PrimaryKey, AutoIncrement]
         int ItemId { get; set; }
