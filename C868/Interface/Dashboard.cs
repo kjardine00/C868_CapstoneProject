@@ -45,12 +45,19 @@ namespace C868
 
         private void NewProdBtn_Click(object sender, EventArgs e)
         {
+            bool isNewProd = true;
+            Product NewProduct = new Product
+            {
 
+            };
+            new ProductForm(isNewProd, NewProduct).ShowDialog();
         }
 
         private void UpdateProdBtn_Click(object sender, EventArgs e)
         {
-
+            bool isNewProd = false;
+            Product UpdateProduct = (Product)InventoryDGV.CurrentRow.DataBoundItem;
+            new ProductForm(isNewProd, UpdateProduct);
         }
 
         private void ExitBtn_Click(object sender, EventArgs e)

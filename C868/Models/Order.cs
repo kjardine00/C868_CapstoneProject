@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SQLite;
 
 namespace C868.Models
 {
-    [Table("Order")]
     public class Order
     {
         int OrderId { get; set; }

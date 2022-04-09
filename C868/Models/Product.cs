@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SQLite;
+using SQLitePCL;
 
 namespace C868.Models
 {
-    [Table("Product")]
     public class Product
     {
-        [PrimaryKey, AutoIncrement]
-        int ProdID { get; set; }
-        string ProdName { get; set; }
-        string ProdSKU { get; set; }
-        int ProdPrice { get; set; }
+        public int ProdID { get; set; }
+        public string ProdName { get; set; }
+        public string ProdSKU { get; set; }
+        public int ProdPrice { get; set; }
     }
 }
