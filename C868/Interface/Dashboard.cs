@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using C868.Models;
+using System.Data.SQLite;
+
 
 namespace C868
 {
@@ -16,14 +18,37 @@ namespace C868
         BindingSource orderBindingSource = new BindingSource();
         BindingSource inventoryBindingSource = new BindingSource();
 
-        public Dashboard()
+        public Dashboard(string dbPath)
         {
             InitializeComponent();
         }
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
+            SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
+            conn.Open();
 
+            string query1 = "SELECT * FROM Product";
+            SQLiteCommand inventoryCmd = new SQLiteCommand(query1, conn);
+
+            DataTable inventoryDataTable = new DataTable();
+
+            SQLiteDataAdapter prodAdapter = new SQLiteDataAdapter(inventoryCmd);
+            prodAdapter.Fill(inventoryDataTable);
+
+            InventoryDGV.DataSource = inventoryDataTable;
+
+            string orderQuery = "SELECT * FROM Product";
+            SQLiteCommand ordersCmd = new SQLiteCommand(orderQuery, conn);
+
+            DataTable ordersDataTable = new DataTable();
+
+            SQLiteDataAdapter ordersAdapter = new SQLiteDataAdapter(ordersCmd);
+            ordersAdapter.Fill(ordersDataTable);
+
+            OrdersDGV.DataSource = ordersDataTable;
+
+            conn.Close();
         }
 
         private void NewOrderBtn_Click(object sender, EventArgs e)

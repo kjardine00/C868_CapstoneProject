@@ -326,6 +326,7 @@ namespace C868
             this.Controls.Add(this.label1);
             this.Name = "OrderForm";
             this.Text = "Order Details";
+            this.Load += new System.EventHandler(this.OrderForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

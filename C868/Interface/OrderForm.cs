@@ -18,9 +18,14 @@ namespace C868
             InitializeComponent();
         }
 
-        private void BackBtn_Click(object sender, EventArgs e)
+        private void OrderForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void BackBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void AddBtn_Click(object sender, EventArgs e)
@@ -42,5 +47,6 @@ namespace C868
         {
 
         }
+
     }
 }
