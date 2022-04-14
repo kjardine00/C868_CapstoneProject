@@ -11,6 +11,14 @@ namespace C868.Models
         public int ProdID { get; set; }
         public string ProdName { get; set; }
         public string ProdSKU { get; set; }
-        public int ProdPrice { get; set; }
+        public decimal ProdPrice { get; set; }
+
+        public Product(int pID, string pName, string pSKU, decimal pPrice)
+        {
+            ProdID = pID;
+            ProdName = pName;
+            ProdSKU = pSKU;
+            ProdPrice = pPrice;
+        }
     }
 }

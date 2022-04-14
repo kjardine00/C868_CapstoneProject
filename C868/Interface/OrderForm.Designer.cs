@@ -36,14 +36,14 @@ namespace C868
             this.CustEmailText = new System.Windows.Forms.TextBox();
             this.CustPhoneText = new System.Windows.Forms.TextBox();
             this.CustNameText = new System.Windows.Forms.TextBox();
-            this.ProdIdText = new System.Windows.Forms.TextBox();
+            this.OrderIdText = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.ProdPicker = new System.Windows.Forms.ComboBox();
             this.AddBtn = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ProductCartDGV = new System.Windows.Forms.DataGridView();
             this.label6 = new System.Windows.Forms.Label();
             this.RemoveBtn = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -55,7 +55,7 @@ namespace C868
             this.TotalPriceText = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ProductCartDGV)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -119,14 +119,14 @@ namespace C868
             this.CustNameText.Size = new System.Drawing.Size(335, 20);
             this.CustNameText.TabIndex = 17;
             // 
-            // ProdIdText
+            // OrderIdText
             // 
-            this.ProdIdText.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ProdIdText.Location = new System.Drawing.Point(249, 27);
-            this.ProdIdText.Name = "ProdIdText";
-            this.ProdIdText.ReadOnly = true;
-            this.ProdIdText.Size = new System.Drawing.Size(69, 20);
-            this.ProdIdText.TabIndex = 16;
+            this.OrderIdText.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.OrderIdText.Location = new System.Drawing.Point(249, 27);
+            this.OrderIdText.Name = "OrderIdText";
+            this.OrderIdText.ReadOnly = true;
+            this.OrderIdText.Size = new System.Drawing.Size(69, 20);
+            this.OrderIdText.TabIndex = 16;
             // 
             // label5
             // 
@@ -182,13 +182,18 @@ namespace C868
             this.AddBtn.UseVisualStyleBackColor = true;
             this.AddBtn.Click += new System.EventHandler(this.AddBtn_Click);
             // 
-            // dataGridView1
+            // ProductCartDGV
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(17, 230);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(434, 150);
-            this.dataGridView1.TabIndex = 22;
+            this.ProductCartDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.ProductCartDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ProductCartDGV.Location = new System.Drawing.Point(17, 230);
+            this.ProductCartDGV.MultiSelect = false;
+            this.ProductCartDGV.Name = "ProductCartDGV";
+            this.ProductCartDGV.ReadOnly = true;
+            this.ProductCartDGV.RowHeadersVisible = false;
+            this.ProductCartDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.ProductCartDGV.Size = new System.Drawing.Size(434, 150);
+            this.ProductCartDGV.TabIndex = 22;
             // 
             // label6
             // 
@@ -309,13 +314,13 @@ namespace C868
             this.Controls.Add(this.label7);
             this.Controls.Add(this.RemoveBtn);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.ProductCartDGV);
             this.Controls.Add(this.AddBtn);
             this.Controls.Add(this.ProdPicker);
             this.Controls.Add(this.CustEmailText);
             this.Controls.Add(this.CustPhoneText);
             this.Controls.Add(this.CustNameText);
-            this.Controls.Add(this.ProdIdText);
+            this.Controls.Add(this.OrderIdText);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -326,8 +331,7 @@ namespace C868
             this.Controls.Add(this.label1);
             this.Name = "OrderForm";
             this.Text = "Order Details";
-            this.Load += new System.EventHandler(this.OrderForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ProductCartDGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -342,14 +346,14 @@ namespace C868
         private System.Windows.Forms.TextBox CustEmailText;
         private System.Windows.Forms.TextBox CustPhoneText;
         private System.Windows.Forms.TextBox CustNameText;
-        private System.Windows.Forms.TextBox ProdIdText;
+        private System.Windows.Forms.TextBox OrderIdText;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox ProdPicker;
         private System.Windows.Forms.Button AddBtn;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView ProductCartDGV;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button RemoveBtn;
         private System.Windows.Forms.Label label7;

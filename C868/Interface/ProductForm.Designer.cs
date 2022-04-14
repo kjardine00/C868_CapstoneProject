@@ -39,8 +39,8 @@ namespace C868
             this.DeleteBtn = new System.Windows.Forms.Button();
             this.ProdIdText = new System.Windows.Forms.TextBox();
             this.ProdNameText = new System.Windows.Forms.TextBox();
-            this.ProdSKUText = new System.Windows.Forms.TextBox();
             this.ProdPriceText = new System.Windows.Forms.TextBox();
+            this.ProdSKUText = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -76,18 +76,18 @@ namespace C868
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(56, 169);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 13);
+            this.label4.Size = new System.Drawing.Size(29, 13);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Price";
+            this.label4.Text = "SKU";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(58, 137);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 13);
+            this.label5.Size = new System.Drawing.Size(31, 13);
             this.label5.TabIndex = 4;
-            this.label5.Text = "SKU";
+            this.label5.Text = "Price";
             // 
             // SaveBtn
             // 
@@ -135,27 +135,27 @@ namespace C868
             this.ProdNameText.Size = new System.Drawing.Size(254, 20);
             this.ProdNameText.TabIndex = 9;
             // 
-            // ProdSKUText
-            // 
-            this.ProdSKUText.Location = new System.Drawing.Point(93, 134);
-            this.ProdSKUText.Name = "ProdSKUText";
-            this.ProdSKUText.Size = new System.Drawing.Size(254, 20);
-            this.ProdSKUText.TabIndex = 10;
-            // 
             // ProdPriceText
             // 
-            this.ProdPriceText.Location = new System.Drawing.Point(93, 166);
+            this.ProdPriceText.Location = new System.Drawing.Point(93, 134);
             this.ProdPriceText.Name = "ProdPriceText";
             this.ProdPriceText.Size = new System.Drawing.Size(254, 20);
-            this.ProdPriceText.TabIndex = 11;
+            this.ProdPriceText.TabIndex = 10;
+            // 
+            // ProdSKUText
+            // 
+            this.ProdSKUText.Location = new System.Drawing.Point(93, 166);
+            this.ProdSKUText.Name = "ProdSKUText";
+            this.ProdSKUText.Size = new System.Drawing.Size(254, 20);
+            this.ProdSKUText.TabIndex = 11;
             // 
             // ProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(368, 270);
-            this.Controls.Add(this.ProdPriceText);
             this.Controls.Add(this.ProdSKUText);
+            this.Controls.Add(this.ProdPriceText);
             this.Controls.Add(this.ProdNameText);
             this.Controls.Add(this.ProdIdText);
             this.Controls.Add(this.DeleteBtn);
@@ -185,7 +185,7 @@ namespace C868
         private System.Windows.Forms.Button DeleteBtn;
         private System.Windows.Forms.TextBox ProdIdText;
         private System.Windows.Forms.TextBox ProdNameText;
-        private System.Windows.Forms.TextBox ProdSKUText;
         private System.Windows.Forms.TextBox ProdPriceText;
+        private System.Windows.Forms.TextBox ProdSKUText;
     }
 }

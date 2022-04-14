@@ -21,9 +21,10 @@ namespace C868
         public Dashboard(string dbPath)
         {
             InitializeComponent();
+            DGVrefresh();
         }
 
-        private void Dashboard_Load(object sender, EventArgs e)
+        private void DGVrefresh()
         {
             SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
             conn.Open();
@@ -38,7 +39,7 @@ namespace C868
 
             InventoryDGV.DataSource = inventoryDataTable;
 
-            string orderQuery = "SELECT * FROM Product";
+            string orderQuery = "SELECT * FROM Orders";
             SQLiteCommand ordersCmd = new SQLiteCommand(orderQuery, conn);
 
             DataTable ordersDataTable = new DataTable();
@@ -54,35 +55,55 @@ namespace C868
         private void NewOrderBtn_Click(object sender, EventArgs e)
         {
             bool isNewOrder = true;
-            Order NewOrder = new Order
-            {
+            int orderId = 0;
+            new OrderForm(isNewOrder, orderId).ShowDialog();
 
-            };
-            new OrderForm(isNewOrder, NewOrder).ShowDialog();
+            DGVrefresh();
         }
 
         private void UpdateOrderBtn_Click(object sender, EventArgs e)
         {
-            bool isNewOrder = true;
-            Order UpdateOrder = (Order)OrdersDGV.CurrentRow.DataBoundItem;
-            new OrderForm(isNewOrder, UpdateOrder).ShowDialog();
+            bool isNewOrder = false;
+
+            if (OrdersDGV.SelectedRows.Count > 0)
+            {
+                int orderId = Convert.ToInt32(OrdersDGV.SelectedRows[0].Cells[0].Value);
+
+                new OrderForm(isNewOrder, orderId).ShowDialog();
+
+                DGVrefresh();
+            }
+            else
+            {
+                MessageBox.Show("Please select an Order you would like to update.");
+            }
         }
 
         private void NewProdBtn_Click(object sender, EventArgs e)
         {
             bool isNewProd = true;
-            Product NewProduct = new Product
-            {
+            int prodId = 0;
+            new ProductForm(isNewProd, prodId).ShowDialog();
 
-            };
-            new ProductForm(isNewProd, NewProduct).ShowDialog();
+            DGVrefresh();
         }
 
         private void UpdateProdBtn_Click(object sender, EventArgs e)
         {
             bool isNewProd = false;
-            Product UpdateProduct = (Product)InventoryDGV.CurrentRow.DataBoundItem;
-            new ProductForm(isNewProd, UpdateProduct);
+
+            if (InventoryDGV.SelectedRows.Count > 0)
+            {
+                int prodId = Convert.ToInt32(InventoryDGV.SelectedRows[0].Cells[0].Value);
+
+                new ProductForm(isNewProd, prodId).ShowDialog();
+
+                DGVrefresh();
+            }
+            else
+            {
+                MessageBox.Show("Please select a Product you would like to update.");
+            }
         }
 
         private void ExitBtn_Click(object sender, EventArgs e)

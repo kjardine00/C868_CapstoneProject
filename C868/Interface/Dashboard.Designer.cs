@@ -39,11 +39,11 @@ namespace C868
             this.UpdateProdBtn = new System.Windows.Forms.Button();
             this.NewProdBtn = new System.Windows.Forms.Button();
             this.InventoryDGV = new System.Windows.Forms.DataGridView();
+            this.ReportsTab = new System.Windows.Forms.TabPage();
             this.ExitBtn = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.SearchBtn = new System.Windows.Forms.Button();
             this.SearchText = new System.Windows.Forms.TextBox();
-            this.ReportsTab = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.OrdersTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OrdersDGV)).BeginInit();
@@ -103,6 +103,7 @@ namespace C868
             // 
             this.OrdersDGV.AllowUserToAddRows = false;
             this.OrdersDGV.AllowUserToDeleteRows = false;
+            this.OrdersDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.OrdersDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.OrdersDGV.Dock = System.Windows.Forms.DockStyle.Top;
             this.OrdersDGV.Location = new System.Drawing.Point(3, 3);
@@ -162,6 +163,16 @@ namespace C868
             this.InventoryDGV.Size = new System.Drawing.Size(1145, 439);
             this.InventoryDGV.TabIndex = 4;
             // 
+            // ReportsTab
+            // 
+            this.ReportsTab.Location = new System.Drawing.Point(4, 33);
+            this.ReportsTab.Name = "ReportsTab";
+            this.ReportsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.ReportsTab.Size = new System.Drawing.Size(1151, 506);
+            this.ReportsTab.TabIndex = 2;
+            this.ReportsTab.Text = "Reports";
+            this.ReportsTab.UseVisualStyleBackColor = true;
+            // 
             // ExitBtn
             // 
             this.ExitBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
@@ -201,16 +212,6 @@ namespace C868
             this.SearchText.Size = new System.Drawing.Size(247, 26);
             this.SearchText.TabIndex = 5;
             // 
-            // ReportsTab
-            // 
-            this.ReportsTab.Location = new System.Drawing.Point(4, 33);
-            this.ReportsTab.Name = "ReportsTab";
-            this.ReportsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ReportsTab.Size = new System.Drawing.Size(1151, 506);
-            this.ReportsTab.TabIndex = 2;
-            this.ReportsTab.Text = "Reports";
-            this.ReportsTab.UseVisualStyleBackColor = true;
-            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -223,7 +224,6 @@ namespace C868
             this.Controls.Add(this.tabControl1);
             this.Name = "Dashboard";
             this.Text = "Skin Strategy Inventory Manager";
-            this.Load += new System.EventHandler(this.Dashboard_Load);
             this.tabControl1.ResumeLayout(false);
             this.OrdersTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.OrdersDGV)).EndInit();
