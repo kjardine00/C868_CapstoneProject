@@ -15,9 +15,13 @@ namespace C868
     public partial class OrderForm : Form
     {
         bool newOrder;
+        int oId;
+
         public OrderForm(bool isNew, int orderId)
         {
             newOrder = isNew;
+            oId = orderId;
+
             InitializeComponent();
             LoadForm(orderId);
             LoadCart(orderId);
@@ -136,7 +140,61 @@ namespace C868
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
+            List<OrderItems> itemsList = new List<OrderItems>();
+            OrderItems oItem = null;
 
+            Product prod = (Product)ProdPicker.SelectedItem;
+            int prodId = prod.ProdID;
+
+            int prodQty = 0;
+
+            SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
+            conn.Open();
+
+            string query1 = "SELECT EntryId, OrderId, ProductId, ProdQty FROM OrderItems WHERE OrderId = @Id";
+            SQLiteCommand cmd = new SQLiteCommand(query1, conn);
+            cmd.Parameters.AddWithValue("@Id", oId);
+
+            using (SQLiteDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    oItem = new OrderItems(
+                        Convert.ToInt32(reader["ProdId"]),
+                        Convert.ToInt32(reader["ProdId"]),
+                        Convert.ToInt32(reader["ProdId"]),
+                        Convert.ToInt32(reader["ProdId"])
+                        );
+
+                    itemsList.Add(oItem);
+                }
+                reader.Close();
+            }
+
+            foreach (OrderItems item in itemsList)
+            {
+                if (item.ProductId == prodId)
+                {
+                    prodQty++;
+                }
+            }
+
+            if (prodQty > 0)
+            {
+                string query2 = "UPDATE OrderItems SET ProdQty = @Qty WHERE ProdId = @pId";
+                SQLiteCommand cmd2 = new SQLiteCommand(query1, conn);
+                cmd2.Parameters.AddWithValue("@Qty", prodQty);
+                cmd2.Parameters.AddWithValue("@pId", prodId);
+            }
+            else //Stopped here
+            {
+                string query3 = "INSERT OrderItems ProdQty = @Qty WHERE ProdId = @pId";
+                SQLiteCommand cmd3 = new SQLiteCommand(query1, conn);
+                cmd3.Parameters.AddWithValue("@Qty", prodQty);
+                cmd3.Parameters.AddWithValue("@pId", prodId);
+            }
+
+            LoadCart(oId);
         }
 
         private void RemoveBtn_Click(object sender, EventArgs e)

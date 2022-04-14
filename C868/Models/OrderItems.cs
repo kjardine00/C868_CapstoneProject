@@ -8,8 +8,17 @@ namespace C868.Models
 {
     public class OrderItems
     {
-        int ItemId { get; set; }
-        int OrderId { get; set; }
-        int ProductId { get; set; }
+        public int ItemId { get; set; }
+        public int OrderId { get; set; }
+        public int ProductId { get; set; }
+        public int ProdQty { get; set; }
+
+        public OrderItems(int item, int order, int product, int qty)
+        {
+            ItemId = item;
+            OrderId = order;
+            ProductId = product;
+            ProdQty = qty;
+        }
     }
 }
