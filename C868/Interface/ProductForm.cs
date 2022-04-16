@@ -28,7 +28,7 @@ namespace C868
             {
                 Product loadProd = null;
 
-                SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
+                SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
                 conn.Open();
 
                 string query1 = "SELECT ProdId, ProdName, ProdPrice, ProdSKU FROM Product WHERE ProdId = @ID";
@@ -72,7 +72,7 @@ namespace C868
         {
             int prodId = Convert.ToInt32(ProdIdText.Text);
 
-            SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
+            SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
             conn.Open();
 
             string query1 = "DELETE FROM Product WHERE ProdId = @ID";
@@ -104,7 +104,7 @@ namespace C868
                 return;
             }
 
-            SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
+            SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
             conn.Open();
 
             if (newProd == true)

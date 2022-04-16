@@ -32,14 +32,16 @@ namespace C868
 
         private void LoadForm(int ordID)
         {
-            SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
+            OrderDateTimePicker.Value = DateTime.Now;
+
+            SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
             conn.Open();
 
             if (newOrder == false)
             {
                 Order loadOrder = null;
 
-                string query0 = "SELECT OrderId, CustName, CustPhone, CustEmail, OrderTotal FROM Orders WHERE OrderId = @Id";
+                string query0 = "SELECT OrderId, date(OrderDate), CustName, CustPhone, CustEmail, OrderTotal FROM Orders WHERE OrderId = @Id";
                 SQLiteCommand ordCmd = new SQLiteCommand(query0, conn);
                 ordCmd.Parameters.AddWithValue("@Id", ordID);
 
@@ -47,15 +49,17 @@ namespace C868
                 {
                     while (reader.Read())
                     {
-                        loadOrder = new Order(
-                            Convert.ToInt32(reader["OrderId"]),
-                            reader["CustName"].ToString(),
-                            reader["CustPhone"].ToString(),
-                            reader["CustEmail"].ToString(),
-                            Convert.ToDecimal(reader["OrderTotal"])
-                            );
+                        int id = Convert.ToInt32(reader["OrderId"]);
+                        DateTime date = Convert.ToDateTime(reader["date(OrderDate)"]);
+                        string name = reader["CustName"].ToString();
+                        string phone = reader["CustPhone"].ToString();
+                        string email = reader["CustEmail"].ToString();
+                        decimal total = Convert.ToDecimal(reader["OrderTotal"]);
+
+                        loadOrder = new Order(id, date, name, phone, email, total);
 
                         OrderIdText.Text = loadOrder.OrderId.ToString();
+                        OrderDateTimePicker.Value = loadOrder.OrderDate;
                         CustNameText.Text = loadOrder.CustName.ToString();
                         CustPhoneText.Text = loadOrder.CustPhone.ToString();
                         CustEmailText.Text = loadOrder.CustEmail.ToString();
@@ -83,7 +87,7 @@ namespace C868
             {
                 int currentOrderId = Convert.ToInt32(OrderIdText.Text);
 
-                SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
+                SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
                 conn.Open();
 
                 string query1 =
@@ -112,7 +116,7 @@ namespace C868
 
             Product loadProd = null;
 
-            SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
+            SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
             conn.Open();
 
             string query1 = "SELECT ProdId, ProdName, ProdPrice, ProdSKU FROM Product";
@@ -180,7 +184,7 @@ namespace C868
             {
                 int cartId = Convert.ToInt32(ProductCartDGV.SelectedRows[0].Cells[0].Value);
 
-                SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
+                SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
                 conn.Open();
 
                 string query0 = "DELETE FROM OrderItems WHERE EntryId = @cartId;";
@@ -221,7 +225,7 @@ namespace C868
         {
             int currentOrderId = Convert.ToInt32(OrderIdText.Text);
 
-            SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
+            SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
             conn.Open();
 
             string query1 = "DELETE FROM Orders WHERE OrderId = @ID";
@@ -242,7 +246,7 @@ namespace C868
 
         private void SaveCart(int orderId)
         {
-            SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
+            SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
             conn.Open();
 
             string query0 = "DELETE FROM OrderItems WHERE OrderId = @ID";
@@ -281,16 +285,18 @@ namespace C868
             {
                 string custPhone = CustPhoneText.Text;
                 string custEmail = CustEmailText.Text;
+                DateTime orderDate = OrderDateTimePicker.Value;
 
-                SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
+                SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
                 conn.Open();
 
                 if (newOrder == true)
                 {
                     string query0 =
-                        "INSERT INTO Orders (CustName, CustPhone, CustEmail, OrderTotal) " +
-                        "VALUES (@name, @phone, @email, @total)";
+                        "INSERT INTO Orders (OrderDate, CustName, CustPhone, CustEmail, OrderTotal) " +
+                        "VALUES (datetime(@date), @name, @phone, @email, @total)";
                     SQLiteCommand cmd0 = new SQLiteCommand(query0, conn);
+                    cmd0.Parameters.AddWithValue("@date", orderDate);
                     cmd0.Parameters.AddWithValue("@name", custName);
                     cmd0.Parameters.AddWithValue("@phone", custPhone);
                     cmd0.Parameters.AddWithValue("@email", custEmail);
@@ -318,10 +324,11 @@ namespace C868
 
                     string query1 =
                         "UPDATE Orders " +
-                        "SET CustName = @name, CustPhone = @phone, CustEmail = @email, OrderTotal = @total " +
+                        "SET OrderDate = datetime(@date), CustName = @name, CustPhone = @phone, CustEmail = @email, OrderTotal = @total " +
                         "WHERE OrderId = @ID";
                     SQLiteCommand cmd1 = new SQLiteCommand(query1, conn);
                     cmd1.Parameters.AddWithValue("@ID", orderId);
+                    cmd1.Parameters.AddWithValue("@date", orderId);
                     cmd1.Parameters.AddWithValue("@name", custName);
                     cmd1.Parameters.AddWithValue("@phone", custPhone);
                     cmd1.Parameters.AddWithValue("@email", custEmail);

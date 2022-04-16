@@ -55,6 +55,8 @@ namespace C868
             this.TotalPriceText = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.OrderDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ProductCartDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -298,11 +300,30 @@ namespace C868
             this.label12.TabIndex = 33;
             this.label12.Text = "Customer Information";
             // 
+            // OrderDateTimePicker
+            // 
+            this.OrderDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.OrderDateTimePicker.Location = new System.Drawing.Point(51, 56);
+            this.OrderDateTimePicker.Name = "OrderDateTimePicker";
+            this.OrderDateTimePicker.Size = new System.Drawing.Size(102, 20);
+            this.OrderDateTimePicker.TabIndex = 34;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(15, 60);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(30, 13);
+            this.label13.TabIndex = 35;
+            this.label13.Text = "Date";
+            // 
             // OrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(471, 619);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.OrderDateTimePicker);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.TotalPriceText);
@@ -365,5 +386,7 @@ namespace C868
         private System.Windows.Forms.TextBox TotalPriceText;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.DateTimePicker OrderDateTimePicker;
+        private System.Windows.Forms.Label label13;
     }
 }

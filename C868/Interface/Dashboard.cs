@@ -26,7 +26,7 @@ namespace C868
 
         private void DGVrefresh()
         {
-            SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
+            SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
             conn.Open();
 
             string query1 = "SELECT * FROM Product";
