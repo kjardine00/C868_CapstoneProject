@@ -17,27 +17,29 @@ namespace C868
         bool newOrder;
         int oId;
 
+        public DataTable cartDataTable = new DataTable();
+
         public OrderForm(bool isNew, int orderId)
         {
             newOrder = isNew;
             oId = orderId;
 
             InitializeComponent();
-            LoadForm(orderId);
-            LoadCart(orderId);
+            LoadForm(oId);
+            LoadCart();
             LoadPicker();
         }
 
         private void LoadForm(int ordID)
         {
+            SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
+            conn.Open();
+
             if (newOrder == false)
             {
                 Order loadOrder = null;
 
-                SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
-                conn.Open();
-
-                string query0 = "SELECT OrderId, CustName, CustPhone, CustEmail, OrderTotal FROM Order WHERE OrderId = @Id";
+                string query0 = "SELECT OrderId, CustName, CustPhone, CustEmail, OrderTotal FROM Orders WHERE OrderId = @Id";
                 SQLiteCommand ordCmd = new SQLiteCommand(query0, conn);
                 ordCmd.Parameters.AddWithValue("@Id", ordID);
 
@@ -60,38 +62,45 @@ namespace C868
                     }
                     reader.Close();
                 }
-                conn.Close();
-
-
                 DeleteBtn.Visible = true;
             }
             else
             {
                 DeleteBtn.Visible = false;
             }
+            conn.Close();
         }
 
-        private void LoadCart(int ordId)
+        private void LoadCart()
         {
+            cartDataTable.Columns.Clear();
+            if (!cartDataTable.Columns.Contains("ProdID")) { cartDataTable.Columns.Add("ProdID", typeof(int)); }
+            if (!cartDataTable.Columns.Contains("ProdName")) { cartDataTable.Columns.Add("ProdName", typeof(string)); }
+            if (!cartDataTable.Columns.Contains("ProdPrice")) { cartDataTable.Columns.Add("ProdPrice", typeof(decimal)); }
+            if (!cartDataTable.Columns.Contains("ProdQty")) { cartDataTable.Columns.Add("ProdQty", typeof(int)); }
+
             if (newOrder == false)
             {
+                int currentOrderId = Convert.ToInt32(OrderIdText.Text);
+
                 SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
                 conn.Open();
 
-                string query1 = "SELECT OrderItems.EntryId, Product.ProdID, Product.ProdName, Product.Price, OrderItems.ProdQty" +
-                    "FROM OrderItems" +
-                    "INNERJOIN Product " +
-                    "ON OrderItems.ProductId = Product" +
-                    "WHERE OrderItems.OrderId = @Id";
+                string query1 =
+                    "SELECT Product.ProdID, Product.ProdName, Product.ProdPrice, OrderItems.ProdQty " +
+                    "FROM OrderItems " +
+                    "INNER JOIN Product " +
+                    "ON OrderItems.ProductId = Product.ProdId " +
+                    "WHERE OrderItems.OrderId = @Id;";
                 SQLiteCommand cartCmd = new SQLiteCommand(query1, conn);
-                cartCmd.Parameters.AddWithValue("@Id", ordId);
-
-                DataTable cartDataTable = new DataTable();
+                cartCmd.Parameters.AddWithValue("@Id", currentOrderId);
 
                 SQLiteDataAdapter prodAdapter = new SQLiteDataAdapter(cartCmd);
                 prodAdapter.Fill(cartDataTable);
 
                 ProductCartDGV.DataSource = cartDataTable;
+
+                UpdateTotal();
 
                 conn.Close();
             }
@@ -125,7 +134,6 @@ namespace C868
                 reader.Close();
             }
 
-
             ProdPicker.ValueMember = null;
             ProdPicker.DisplayMember = "ProdName";
             ProdPicker.DataSource = picker;
@@ -140,77 +148,192 @@ namespace C868
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
-            List<OrderItems> itemsList = new List<OrderItems>();
-            OrderItems oItem = null;
+            bool exists = false;
 
             Product prod = (Product)ProdPicker.SelectedItem;
-            int prodId = prod.ProdID;
 
-            int prodQty = 0;
-
-            SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
-            conn.Open();
-
-            string query1 = "SELECT EntryId, OrderId, ProductId, ProdQty FROM OrderItems WHERE OrderId = @Id";
-            SQLiteCommand cmd = new SQLiteCommand(query1, conn);
-            cmd.Parameters.AddWithValue("@Id", oId);
-
-            using (SQLiteDataReader reader = cmd.ExecuteReader())
+            foreach (DataRow row in cartDataTable.Rows)
             {
-                while (reader.Read())
-                {
-                    oItem = new OrderItems(
-                        Convert.ToInt32(reader["ProdId"]),
-                        Convert.ToInt32(reader["ProdId"]),
-                        Convert.ToInt32(reader["ProdId"]),
-                        Convert.ToInt32(reader["ProdId"])
-                        );
+                int existProd = (int)row["ProdId"];
 
-                    itemsList.Add(oItem);
-                }
-                reader.Close();
-            }
-
-            foreach (OrderItems item in itemsList)
-            {
-                if (item.ProductId == prodId)
+                if (prod.ProdID == existProd)
                 {
-                    prodQty++;
+                    int qty = (int)row["ProdQty"];
+                    qty++;
+                    row["ProdQty"] = qty;
+                    exists = true;
                 }
             }
 
-            if (prodQty > 0)
+            if (exists == false)
             {
-                string query2 = "UPDATE OrderItems SET ProdQty = @Qty WHERE ProdId = @pId";
-                SQLiteCommand cmd2 = new SQLiteCommand(query1, conn);
-                cmd2.Parameters.AddWithValue("@Qty", prodQty);
-                cmd2.Parameters.AddWithValue("@pId", prodId);
-            }
-            else //Stopped here
-            {
-                string query3 = "INSERT OrderItems ProdQty = @Qty WHERE ProdId = @pId";
-                SQLiteCommand cmd3 = new SQLiteCommand(query1, conn);
-                cmd3.Parameters.AddWithValue("@Qty", prodQty);
-                cmd3.Parameters.AddWithValue("@pId", prodId);
+                cartDataTable.Rows.Add(prod.ProdID, prod.ProdName, prod.ProdPrice, 1);
             }
 
-            LoadCart(oId);
+            ProductCartDGV.DataSource = cartDataTable;
+            UpdateTotal();
         }
 
         private void RemoveBtn_Click(object sender, EventArgs e)
         {
+            if (ProductCartDGV.RowCount > 0)
+            {
+                int cartId = Convert.ToInt32(ProductCartDGV.SelectedRows[0].Cells[0].Value);
 
+                SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
+                conn.Open();
+
+                string query0 = "DELETE FROM OrderItems WHERE EntryId = @cartId;";
+                SQLiteCommand cmd = new SQLiteCommand(query0, conn);
+                cmd.Parameters.AddWithValue("@cartId", cartId);
+
+                cmd.ExecuteNonQuery();
+
+                conn.Close();
+            }
+            else
+            {
+                MessageBox.Show("This order's cart is already empty");
+            }
+
+            UpdateTotal();
+        }
+
+        private void UpdateTotal()
+        {
+            decimal subtotal = 0;
+            
+            foreach (DataRow row in cartDataTable.Rows)
+            {
+                subtotal = subtotal + Convert.ToDecimal(row["ProdPrice"]);
+            }
+
+            SubTotalText.Text = subtotal.ToString();
+
+            decimal tax = (subtotal * 7.15m ) / 100;
+
+            TaxText.Text = tax.ToString();
+
+            TotalPriceText.Text = (subtotal + tax).ToString();
         }
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
+            int currentOrderId = Convert.ToInt32(OrderIdText.Text);
 
+            SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
+            conn.Open();
+
+            string query1 = "DELETE FROM Orders WHERE OrderId = @ID";
+            SQLiteCommand cmd1 = new SQLiteCommand(query1, conn);
+            cmd1.Parameters.AddWithValue("@ID", currentOrderId);
+
+            string query2 = "DELETE FROM OrderItems WHERE OrderId = @ID";
+            SQLiteCommand cmd2 = new SQLiteCommand(query2, conn);
+            cmd2.Parameters.AddWithValue("@ID", currentOrderId);
+
+            cmd2.ExecuteNonQuery();
+            cmd1.ExecuteNonQuery();
+
+            conn.Close();
+
+            this.Close();
+        }
+
+        private void SaveCart(int orderId)
+        {
+            SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
+            conn.Open();
+
+            string query0 = "DELETE FROM OrderItems WHERE OrderId = @ID";
+            SQLiteCommand cmd0 = new SQLiteCommand(query0, conn);
+            cmd0.Parameters.AddWithValue("@ID", orderId);
+            cmd0.ExecuteNonQuery();
+
+            foreach (DataRow row in cartDataTable.Rows)
+            {
+                string query1 = "INSERT INTO OrderItems (OrderId, ProductId, ProdQty) " +
+                "VALUES (@order, @product, @qty)"; ;
+                SQLiteCommand cmd1 = new SQLiteCommand(query1, conn);
+                cmd1.Parameters.AddWithValue("@order", orderId);
+                cmd1.Parameters.AddWithValue("@product", row["ProdId"]);
+                cmd1.Parameters.AddWithValue("@qty", row["ProdQty"]);
+
+                cmd1.ExecuteNonQuery();
+            }
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
+            UpdateTotal();
+            string custName = CustNameText.Text;
+            decimal orderTotal = Convert.ToDecimal(TotalPriceText.Text);
 
+            if (string.IsNullOrWhiteSpace(custName))
+            {
+                MessageBox.Show("Customer Name cannot be blank.");
+            }
+            else if (orderTotal == 0)
+            {
+                MessageBox.Show("This order does not contain any items.");
+            }
+            else
+            {
+                string custPhone = CustPhoneText.Text;
+                string custEmail = CustEmailText.Text;
+
+                SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
+                conn.Open();
+
+                if (newOrder == true)
+                {
+                    string query0 =
+                        "INSERT INTO Orders (CustName, CustPhone, CustEmail, OrderTotal) " +
+                        "VALUES (@name, @phone, @email, @total)";
+                    SQLiteCommand cmd0 = new SQLiteCommand(query0, conn);
+                    cmd0.Parameters.AddWithValue("@name", custName);
+                    cmd0.Parameters.AddWithValue("@phone", custPhone);
+                    cmd0.Parameters.AddWithValue("@email", custEmail);
+                    cmd0.Parameters.AddWithValue("@total", orderTotal);
+
+                    cmd0.ExecuteNonQuery();
+
+                    string query2 =
+                        "SELECT OrderId, CustName, CustPhone, CustEmail, OrderTotal " +
+                        "FROM Orders " +
+                        "WHERE CustName = @name AND CustPhone = @phone AND CustEmail = @email AND OrderTotal = @total";
+                    SQLiteCommand cmd2 = new SQLiteCommand(query2, conn);
+                    cmd2.Parameters.AddWithValue("@name", custName);
+                    cmd2.Parameters.AddWithValue("@phone", custPhone);
+                    cmd2.Parameters.AddWithValue("@email", custEmail);
+                    cmd2.Parameters.AddWithValue("@total", orderTotal);
+
+                    int savedOrderId = Convert.ToInt32(cmd2.ExecuteScalar());
+
+                    SaveCart(savedOrderId);
+                }
+                else
+                {
+                    int orderId = Convert.ToInt32(OrderIdText.Text);
+
+                    string query1 =
+                        "UPDATE Orders " +
+                        "SET CustName = @name, CustPhone = @phone, CustEmail = @email, OrderTotal = @total " +
+                        "WHERE OrderId = @ID";
+                    SQLiteCommand cmd1 = new SQLiteCommand(query1, conn);
+                    cmd1.Parameters.AddWithValue("@ID", orderId);
+                    cmd1.Parameters.AddWithValue("@name", custName);
+                    cmd1.Parameters.AddWithValue("@phone", custPhone);
+                    cmd1.Parameters.AddWithValue("@email", custEmail);
+                    cmd1.Parameters.AddWithValue("@total", orderTotal);
+
+                    cmd1.ExecuteNonQuery();
+
+                    SaveCart(orderId);
+                }
+                conn.Close();
+                this.Close();
+            }
         }
-
     }
 }

@@ -80,7 +80,9 @@ namespace C868
             prodCmd.Parameters.AddWithValue("@ID", prodId);
 
             prodCmd.ExecuteNonQuery();
+
             conn.Close();
+
             this.Close();
         }
 
@@ -102,11 +104,11 @@ namespace C868
                 return;
             }
 
+            SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
+            conn.Open();
+
             if (newProd == true)
             {
-                SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
-                conn.Open();
-
                 string query0 = "INSERT INTO Product (ProdName, ProdPrice, ProdSKU) VALUES (@name, @price, @sku)";
                 SQLiteCommand prodCmd = new SQLiteCommand(query0, conn);
                 prodCmd.Parameters.AddWithValue("@name", prodName);
@@ -115,15 +117,10 @@ namespace C868
                 
 
                 prodCmd.ExecuteNonQuery();
-                conn.Close();
-                this.Close();
             }
             else
             {
                 int prodId = Convert.ToInt32(ProdIdText.Text);
-
-                SQLiteConnection conn = new SQLiteConnection(@"Data source=C:\VS Projects\C868\db.db");
-                conn.Open();
 
                 string query1 = "UPDATE Product SET ProdName = @name, ProdSKU = @sku, ProdPrice = @price WHERE ProdId = @ID";
                 SQLiteCommand prodCmd = new SQLiteCommand(query1, conn);
@@ -132,9 +129,10 @@ namespace C868
                 prodCmd.Parameters.AddWithValue("@sku", prodSKU);
 
                 prodCmd.ExecuteNonQuery();
-                conn.Close();
-                this.Close();
+                
             }
+            conn.Close();
+            this.Close();
         }
     }
 }

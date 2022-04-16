@@ -55,7 +55,7 @@ namespace C868
         private void NewOrderBtn_Click(object sender, EventArgs e)
         {
             bool isNewOrder = true;
-            int orderId = 0;
+            int orderId = 1;
             new OrderForm(isNewOrder, orderId).ShowDialog();
 
             DGVrefresh();
