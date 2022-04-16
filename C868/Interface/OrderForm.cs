@@ -119,7 +119,7 @@ namespace C868
             SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
             conn.Open();
 
-            string query1 = "SELECT ProdId, ProdName, ProdPrice, ProdSKU FROM Product";
+            string query1 = "SELECT ProdId, ProdName, ProdPrice, ProdSKU, Quantity FROM Product";
             SQLiteCommand prodCmd = new SQLiteCommand(query1, conn);
 
             using (SQLiteDataReader reader = prodCmd.ExecuteReader())
@@ -130,7 +130,8 @@ namespace C868
                         Convert.ToInt32(reader["ProdId"]),
                         reader["ProdName"].ToString(),
                         reader["ProdSKU"].ToString(),
-                        Convert.ToDecimal(reader["ProdPrice"])
+                        Convert.ToDecimal(reader["ProdPrice"]), 
+                        Convert.ToInt32(reader["Quantity"])
                         );
 
                     picker.Add(loadProd);
@@ -178,7 +179,7 @@ namespace C868
             UpdateTotal();
         }
 
-        private void RemoveBtn_Click(object sender, EventArgs e)
+        private void RemoveBtn_Click(object sender, EventArgs e) // this needs to not edit the database but edit the datatable
         {
             if (ProductCartDGV.RowCount > 0)
             {
@@ -246,8 +247,65 @@ namespace C868
 
         private void SaveCart(int orderId)
         {
+            QtyByProductId newQty = null;
+            List<QtyByProductId> oldCart = new List<QtyByProductId>();
+            List<QtyByProductId> newCartPlusOldCart = new List<QtyByProductId>();
+
             SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
             conn.Open();
+
+            if (newOrder == true)
+            {
+                foreach (DataRow row in cartDataTable.Rows)
+                {
+                    string query4 = "SELECT Quantity FROM Product WHERE ProdId = @pID";
+                    SQLiteCommand cmd4 = new SQLiteCommand(query4, conn);
+                    cmd4.Parameters.AddWithValue("@pID", row["ProdId"]);
+
+                    int qty = Convert.ToInt32(cmd4.ExecuteScalar()) - Convert.ToInt32(row["ProdQty"]);
+
+                    string query2 = "UPDATE Product SET Quantity = @qty WHERE ProdId = @pId";
+                    SQLiteCommand cmd2 = new SQLiteCommand(query2, conn);
+                    cmd2.Parameters.AddWithValue("@qty", qty);
+                    cmd2.Parameters.AddWithValue("@pId", row["ProdId"]);
+                    cmd2.ExecuteNonQuery();
+                }
+            }
+            else //Trying to get when update an order to make the correct changes to the total amount of product available. 
+            {
+                int qtyToBeSaved;
+
+                string query3 = "SELECT ProductId, ProdQty FROM OrderItems WHERE OrderId = @id";
+                SQLiteCommand cmd3 = new SQLiteCommand(query3, conn);
+                cmd3.Parameters.AddWithValue("@id", orderId);
+
+                using (SQLiteDataReader reader = cmd3.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        newQty = new QtyByProductId(
+                            Convert.ToInt32(reader["ProductId"]),
+                            Convert.ToInt32(reader["ProdQty"])
+                            );
+
+                        oldCart.Add(newQty);
+                    }
+                    reader.Close();
+                }
+
+                foreach (DataRow row in cartDataTable.Rows)
+                {
+                    foreach(QtyByProductId qty in oldCart)
+                    {
+                        if (qty.ProductId == Convert.ToInt32(row["ProductId"]))
+                        {
+
+                        }
+                    }
+                }
+            }
+            
+            // CurrentQTY = CurrentQTY - (NewCart - OldCart)
 
             string query0 = "DELETE FROM OrderItems WHERE OrderId = @ID";
             SQLiteCommand cmd0 = new SQLiteCommand(query0, conn);
@@ -265,6 +323,7 @@ namespace C868
 
                 cmd1.ExecuteNonQuery();
             }
+            conn.Close();
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)

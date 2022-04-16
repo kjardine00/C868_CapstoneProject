@@ -66,6 +66,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interface\AdjustInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\AdjustInventory.Designer.cs">
+      <DependentUpon>AdjustInventory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interface\Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,8 +93,12 @@
     <Compile Include="Interface\ProductForm.Designer.cs">
       <DependentUpon>ProductForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\QtyByProductId.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Interface\AdjustInventory.resx">
+      <DependentUpon>AdjustInventory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Interface\Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>

@@ -31,7 +31,7 @@ namespace C868
                 SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
                 conn.Open();
 
-                string query1 = "SELECT ProdId, ProdName, ProdPrice, ProdSKU FROM Product WHERE ProdId = @ID";
+                string query1 = "SELECT ProdId, ProdName, ProdPrice, ProdSKU, Quantity FROM Product WHERE ProdId = @ID";
                 SQLiteCommand prodCmd = new SQLiteCommand(query1, conn);
                 prodCmd.Parameters.AddWithValue("@ID", prodId);
 
@@ -43,13 +43,15 @@ namespace C868
                             Convert.ToInt32(reader["ProdId"]),
                             reader["ProdName"].ToString(),
                             reader["ProdSKU"].ToString(),
-                            Convert.ToDecimal(reader["ProdPrice"])
+                            Convert.ToDecimal(reader["ProdPrice"]),
+                            Convert.ToInt32(reader["Quantity"])
                             );
 
                         ProdIdText.Text = loadProd.ProdID.ToString();
                         ProdNameText.Text = loadProd.ProdName;
                         ProdPriceText.Text = loadProd.ProdPrice.ToString();
                         ProdSKUText.Text = loadProd.ProdSKU;
+                        QtyText.Text = loadProd.Quantity.ToString();
                     }
                     reader.Close();
                 }
@@ -91,16 +93,28 @@ namespace C868
             string prodName;
             decimal prodPrice;
             string prodSKU;
+            int qty;
+
+            prodName = ProdNameText.Text;
+            prodSKU = ProdSKUText.Text;
 
             try
             {
-                prodName = ProdNameText.Text;
                 prodPrice = Convert.ToDecimal(ProdPriceText.Text);
-                prodSKU = ProdSKUText.Text;
             }
             catch
             {
-                MessageBox.Show("Product Price must be a numeric value.", "Error");
+                MessageBox.Show("Product Price must be a numeric value.", "Warning!");
+                return;
+            }
+
+            try
+            {
+                qty = Convert.ToInt32(QtyText.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Product Quantity must be a numeric value.", "Warning!");
                 return;
             }
 
@@ -109,12 +123,12 @@ namespace C868
 
             if (newProd == true)
             {
-                string query0 = "INSERT INTO Product (ProdName, ProdPrice, ProdSKU) VALUES (@name, @price, @sku)";
+                string query0 = "INSERT INTO Product (ProdName, ProdPrice, ProdSKU, Quantity) VALUES (@name, @price, @sku, @qty)";
                 SQLiteCommand prodCmd = new SQLiteCommand(query0, conn);
                 prodCmd.Parameters.AddWithValue("@name", prodName);
                 prodCmd.Parameters.AddWithValue("@price", prodPrice);
                 prodCmd.Parameters.AddWithValue("@sku", prodSKU);
-                
+                prodCmd.Parameters.AddWithValue("@qty", qty);
 
                 prodCmd.ExecuteNonQuery();
             }
@@ -122,11 +136,12 @@ namespace C868
             {
                 int prodId = Convert.ToInt32(ProdIdText.Text);
 
-                string query1 = "UPDATE Product SET ProdName = @name, ProdSKU = @sku, ProdPrice = @price WHERE ProdId = @ID";
+                string query1 = "UPDATE Product SET ProdName = @name, ProdSKU = @sku, ProdPrice = @price, Quantity = @qty WHERE ProdId = @ID";
                 SQLiteCommand prodCmd = new SQLiteCommand(query1, conn);
                 prodCmd.Parameters.AddWithValue("@name", prodName);
                 prodCmd.Parameters.AddWithValue("@price", prodPrice);
                 prodCmd.Parameters.AddWithValue("@sku", prodSKU);
+                prodCmd.Parameters.AddWithValue("@qty", qty);
 
                 prodCmd.ExecuteNonQuery();
                 

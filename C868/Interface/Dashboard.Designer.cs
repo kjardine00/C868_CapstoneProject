@@ -32,20 +32,21 @@ namespace C868
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.OrdersTab = new System.Windows.Forms.TabPage();
+            this.SearchCustText = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.UpdateOrderBtn = new System.Windows.Forms.Button();
             this.NewOrderBtn = new System.Windows.Forms.Button();
             this.OrdersDGV = new System.Windows.Forms.DataGridView();
             this.InventoryTab = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.AdjustInventoryBtn = new System.Windows.Forms.Button();
+            this.SearchProductText = new System.Windows.Forms.TextBox();
             this.UpdateProdBtn = new System.Windows.Forms.Button();
             this.NewProdBtn = new System.Windows.Forms.Button();
             this.InventoryDGV = new System.Windows.Forms.DataGridView();
             this.ReportsTab = new System.Windows.Forms.TabPage();
             this.ExitBtn = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.SearchCustText = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.SearchProductText = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.OrdersTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OrdersDGV)).BeginInit();
@@ -83,11 +84,31 @@ namespace C868
             this.OrdersTab.Text = "Orders";
             this.OrdersTab.UseVisualStyleBackColor = true;
             // 
+            // SearchCustText
+            // 
+            this.SearchCustText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.SearchCustText.Location = new System.Drawing.Point(849, 463);
+            this.SearchCustText.Name = "SearchCustText";
+            this.SearchCustText.Size = new System.Drawing.Size(294, 26);
+            this.SearchCustText.TabIndex = 5;
+            this.SearchCustText.TextChanged += new System.EventHandler(this.SearchText_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(690, 466);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(153, 20);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Search by Customer";
+            // 
             // UpdateOrderBtn
             // 
-            this.UpdateOrderBtn.Location = new System.Drawing.Point(250, 450);
+            this.UpdateOrderBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UpdateOrderBtn.Location = new System.Drawing.Point(213, 448);
             this.UpdateOrderBtn.Name = "UpdateOrderBtn";
-            this.UpdateOrderBtn.Size = new System.Drawing.Size(236, 50);
+            this.UpdateOrderBtn.Size = new System.Drawing.Size(199, 50);
             this.UpdateOrderBtn.TabIndex = 3;
             this.UpdateOrderBtn.Text = "Update Selected Order";
             this.UpdateOrderBtn.UseVisualStyleBackColor = true;
@@ -95,9 +116,10 @@ namespace C868
             // 
             // NewOrderBtn
             // 
-            this.NewOrderBtn.Location = new System.Drawing.Point(8, 450);
+            this.NewOrderBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NewOrderBtn.Location = new System.Drawing.Point(8, 448);
             this.NewOrderBtn.Name = "NewOrderBtn";
-            this.NewOrderBtn.Size = new System.Drawing.Size(236, 50);
+            this.NewOrderBtn.Size = new System.Drawing.Size(199, 50);
             this.NewOrderBtn.TabIndex = 2;
             this.NewOrderBtn.Text = "New Order";
             this.NewOrderBtn.UseVisualStyleBackColor = true;
@@ -116,13 +138,14 @@ namespace C868
             this.OrdersDGV.ReadOnly = true;
             this.OrdersDGV.RowHeadersVisible = false;
             this.OrdersDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.OrdersDGV.Size = new System.Drawing.Size(1145, 441);
+            this.OrdersDGV.Size = new System.Drawing.Size(1145, 439);
             this.OrdersDGV.TabIndex = 0;
             // 
             // InventoryTab
             // 
-            this.InventoryTab.Controls.Add(this.SearchProductText);
             this.InventoryTab.Controls.Add(this.label2);
+            this.InventoryTab.Controls.Add(this.AdjustInventoryBtn);
+            this.InventoryTab.Controls.Add(this.SearchProductText);
             this.InventoryTab.Controls.Add(this.UpdateProdBtn);
             this.InventoryTab.Controls.Add(this.NewProdBtn);
             this.InventoryTab.Controls.Add(this.InventoryDGV);
@@ -134,11 +157,42 @@ namespace C868
             this.InventoryTab.Text = "Inventory";
             this.InventoryTab.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(704, 464);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(139, 20);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Search by Product";
+            // 
+            // AdjustInventoryBtn
+            // 
+            this.AdjustInventoryBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AdjustInventoryBtn.Location = new System.Drawing.Point(418, 448);
+            this.AdjustInventoryBtn.Name = "AdjustInventoryBtn";
+            this.AdjustInventoryBtn.Size = new System.Drawing.Size(199, 50);
+            this.AdjustInventoryBtn.TabIndex = 9;
+            this.AdjustInventoryBtn.Text = "Adjust Inventory";
+            this.AdjustInventoryBtn.UseVisualStyleBackColor = true;
+            this.AdjustInventoryBtn.Click += new System.EventHandler(this.AddInventoryBtn_Click);
+            // 
+            // SearchProductText
+            // 
+            this.SearchProductText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.SearchProductText.Location = new System.Drawing.Point(849, 461);
+            this.SearchProductText.Name = "SearchProductText";
+            this.SearchProductText.Size = new System.Drawing.Size(294, 26);
+            this.SearchProductText.TabIndex = 7;
+            this.SearchProductText.TextChanged += new System.EventHandler(this.SearchProductText_TextChanged);
+            // 
             // UpdateProdBtn
             // 
-            this.UpdateProdBtn.Location = new System.Drawing.Point(250, 448);
+            this.UpdateProdBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UpdateProdBtn.Location = new System.Drawing.Point(213, 448);
             this.UpdateProdBtn.Name = "UpdateProdBtn";
-            this.UpdateProdBtn.Size = new System.Drawing.Size(236, 50);
+            this.UpdateProdBtn.Size = new System.Drawing.Size(199, 50);
             this.UpdateProdBtn.TabIndex = 6;
             this.UpdateProdBtn.Text = "Update Selected Product";
             this.UpdateProdBtn.UseVisualStyleBackColor = true;
@@ -146,9 +200,10 @@ namespace C868
             // 
             // NewProdBtn
             // 
+            this.NewProdBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NewProdBtn.Location = new System.Drawing.Point(8, 448);
             this.NewProdBtn.Name = "NewProdBtn";
-            this.NewProdBtn.Size = new System.Drawing.Size(236, 50);
+            this.NewProdBtn.Size = new System.Drawing.Size(199, 50);
             this.NewProdBtn.TabIndex = 5;
             this.NewProdBtn.Text = "New Product";
             this.NewProdBtn.UseVisualStyleBackColor = true;
@@ -201,44 +256,6 @@ namespace C868
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
-            // SearchCustText
-            // 
-            this.SearchCustText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.SearchCustText.Location = new System.Drawing.Point(849, 463);
-            this.SearchCustText.Name = "SearchCustText";
-            this.SearchCustText.Size = new System.Drawing.Size(294, 26);
-            this.SearchCustText.TabIndex = 5;
-            this.SearchCustText.TextChanged += new System.EventHandler(this.SearchText_TextChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(662, 463);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(181, 24);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Search by Customer";
-            // 
-            // SearchProductText
-            // 
-            this.SearchProductText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.SearchProductText.Location = new System.Drawing.Point(849, 461);
-            this.SearchProductText.Name = "SearchProductText";
-            this.SearchProductText.Size = new System.Drawing.Size(294, 26);
-            this.SearchProductText.TabIndex = 7;
-            this.SearchProductText.TextChanged += new System.EventHandler(this.SearchProductText_TextChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(678, 461);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(165, 24);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Search by Product";
-            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,6 +295,7 @@ namespace C868
         private System.Windows.Forms.TabPage ReportsTab;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox SearchProductText;
+        private System.Windows.Forms.Button AdjustInventoryBtn;
         private System.Windows.Forms.Label label2;
     }
 }

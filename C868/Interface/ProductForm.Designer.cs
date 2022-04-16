@@ -41,13 +41,15 @@ namespace C868
             this.ProdNameText = new System.Windows.Forms.TextBox();
             this.ProdPriceText = new System.Windows.Forms.TextBox();
             this.ProdSKUText = new System.Windows.Forms.TextBox();
+            this.QtyText = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.label1.Location = new System.Drawing.Point(12, 20);
+            this.label1.Location = new System.Drawing.Point(27, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(176, 29);
             this.label1.TabIndex = 0;
@@ -56,7 +58,7 @@ namespace C868
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 76);
+            this.label2.Location = new System.Drawing.Point(44, 78);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 13);
             this.label2.TabIndex = 1;
@@ -65,7 +67,7 @@ namespace C868
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 106);
+            this.label3.Location = new System.Drawing.Point(27, 108);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 13);
             this.label3.TabIndex = 2;
@@ -74,7 +76,7 @@ namespace C868
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(56, 169);
+            this.label4.Location = new System.Drawing.Point(71, 171);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 13);
             this.label4.TabIndex = 3;
@@ -83,7 +85,7 @@ namespace C868
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(58, 137);
+            this.label5.Location = new System.Drawing.Point(73, 139);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(31, 13);
             this.label5.TabIndex = 4;
@@ -91,7 +93,7 @@ namespace C868
             // 
             // SaveBtn
             // 
-            this.SaveBtn.Location = new System.Drawing.Point(226, 210);
+            this.SaveBtn.Location = new System.Drawing.Point(239, 232);
             this.SaveBtn.Name = "SaveBtn";
             this.SaveBtn.Size = new System.Drawing.Size(121, 37);
             this.SaveBtn.TabIndex = 5;
@@ -101,7 +103,7 @@ namespace C868
             // 
             // BackBtn
             // 
-            this.BackBtn.Location = new System.Drawing.Point(226, 17);
+            this.BackBtn.Location = new System.Drawing.Point(239, 19);
             this.BackBtn.Name = "BackBtn";
             this.BackBtn.Size = new System.Drawing.Size(121, 37);
             this.BackBtn.TabIndex = 6;
@@ -111,7 +113,7 @@ namespace C868
             // 
             // DeleteBtn
             // 
-            this.DeleteBtn.Location = new System.Drawing.Point(93, 210);
+            this.DeleteBtn.Location = new System.Drawing.Point(106, 232);
             this.DeleteBtn.Name = "DeleteBtn";
             this.DeleteBtn.Size = new System.Drawing.Size(121, 37);
             this.DeleteBtn.TabIndex = 7;
@@ -122,7 +124,7 @@ namespace C868
             // ProdIdText
             // 
             this.ProdIdText.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ProdIdText.Location = new System.Drawing.Point(93, 73);
+            this.ProdIdText.Location = new System.Drawing.Point(106, 75);
             this.ProdIdText.Name = "ProdIdText";
             this.ProdIdText.ReadOnly = true;
             this.ProdIdText.Size = new System.Drawing.Size(254, 20);
@@ -130,30 +132,50 @@ namespace C868
             // 
             // ProdNameText
             // 
-            this.ProdNameText.Location = new System.Drawing.Point(93, 103);
+            this.ProdNameText.Location = new System.Drawing.Point(106, 105);
             this.ProdNameText.Name = "ProdNameText";
             this.ProdNameText.Size = new System.Drawing.Size(254, 20);
             this.ProdNameText.TabIndex = 9;
             // 
             // ProdPriceText
             // 
-            this.ProdPriceText.Location = new System.Drawing.Point(93, 134);
+            this.ProdPriceText.Location = new System.Drawing.Point(106, 136);
             this.ProdPriceText.Name = "ProdPriceText";
             this.ProdPriceText.Size = new System.Drawing.Size(254, 20);
             this.ProdPriceText.TabIndex = 10;
             // 
             // ProdSKUText
             // 
-            this.ProdSKUText.Location = new System.Drawing.Point(93, 166);
+            this.ProdSKUText.Location = new System.Drawing.Point(106, 168);
             this.ProdSKUText.Name = "ProdSKUText";
             this.ProdSKUText.Size = new System.Drawing.Size(254, 20);
             this.ProdSKUText.TabIndex = 11;
+            // 
+            // QtyText
+            // 
+            this.QtyText.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.QtyText.Location = new System.Drawing.Point(106, 197);
+            this.QtyText.Name = "QtyText";
+            this.QtyText.ReadOnly = true;
+            this.QtyText.Size = new System.Drawing.Size(254, 20);
+            this.QtyText.TabIndex = 13;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(8, 200);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(92, 13);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Quantity Available";
             // 
             // ProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(368, 270);
+            this.ClientSize = new System.Drawing.Size(374, 281);
+            this.Controls.Add(this.QtyText);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.ProdSKUText);
             this.Controls.Add(this.ProdPriceText);
             this.Controls.Add(this.ProdNameText);
@@ -187,5 +209,7 @@ namespace C868
         private System.Windows.Forms.TextBox ProdNameText;
         private System.Windows.Forms.TextBox ProdPriceText;
         private System.Windows.Forms.TextBox ProdSKUText;
+        private System.Windows.Forms.TextBox QtyText;
+        private System.Windows.Forms.Label label6;
     }
 }

@@ -22,6 +22,8 @@ namespace C868
         {
             InitializeComponent();
             DGVrefresh();
+
+            
         }
 
         private void DGVrefresh()
@@ -117,6 +119,11 @@ namespace C868
         {
             (InventoryDGV.DataSource as DataTable).DefaultView.RowFilter = string.Format("ProdName like '{0}%' OR ProdSKU like '{0}%'", SearchProductText.Text);
             InventoryDGV.Refresh();
+        }
+
+        private void AddInventoryBtn_Click(object sender, EventArgs e)
+        {
+            new AdjustInventory().ShowDialog();
         }
     }
 }
