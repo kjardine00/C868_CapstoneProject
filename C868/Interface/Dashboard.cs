@@ -15,8 +15,8 @@ namespace C868
 {
     public partial class Dashboard : Form
     {
-        BindingSource orderBindingSource = new BindingSource();
-        BindingSource inventoryBindingSource = new BindingSource();
+        private DataTable inventoryDataTable = new DataTable();
+        private DataTable ordersDataTable = new DataTable();
 
         public Dashboard(string dbPath)
         {
@@ -32,8 +32,6 @@ namespace C868
             string query1 = "SELECT * FROM Product";
             SQLiteCommand inventoryCmd = new SQLiteCommand(query1, conn);
 
-            DataTable inventoryDataTable = new DataTable();
-
             SQLiteDataAdapter prodAdapter = new SQLiteDataAdapter(inventoryCmd);
             prodAdapter.Fill(inventoryDataTable);
 
@@ -41,8 +39,6 @@ namespace C868
 
             string orderQuery = "SELECT * FROM Orders";
             SQLiteCommand ordersCmd = new SQLiteCommand(orderQuery, conn);
-
-            DataTable ordersDataTable = new DataTable();
 
             SQLiteDataAdapter ordersAdapter = new SQLiteDataAdapter(ordersCmd);
             ordersAdapter.Fill(ordersDataTable);
@@ -109,6 +105,18 @@ namespace C868
         private void ExitBtn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void SearchText_TextChanged(object sender, EventArgs e)
+        {
+            (OrdersDGV.DataSource as DataTable).DefaultView.RowFilter = string.Format("CustName like '{0}%'", SearchCustText.Text);
+            OrdersDGV.Refresh();
+        }
+
+        private void SearchProductText_TextChanged(object sender, EventArgs e)
+        {
+            (InventoryDGV.DataSource as DataTable).DefaultView.RowFilter = string.Format("ProdName like '{0}%' OR ProdSKU like '{0}%'", SearchProductText.Text);
+            InventoryDGV.Refresh();
         }
     }
 }

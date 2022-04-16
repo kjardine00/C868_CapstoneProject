@@ -42,8 +42,10 @@ namespace C868
             this.ReportsTab = new System.Windows.Forms.TabPage();
             this.ExitBtn = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.SearchBtn = new System.Windows.Forms.Button();
-            this.SearchText = new System.Windows.Forms.TextBox();
+            this.SearchCustText = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.SearchProductText = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.OrdersTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OrdersDGV)).BeginInit();
@@ -67,6 +69,8 @@ namespace C868
             // 
             // OrdersTab
             // 
+            this.OrdersTab.Controls.Add(this.SearchCustText);
+            this.OrdersTab.Controls.Add(this.label1);
             this.OrdersTab.Controls.Add(this.UpdateOrderBtn);
             this.OrdersTab.Controls.Add(this.NewOrderBtn);
             this.OrdersTab.Controls.Add(this.OrdersDGV);
@@ -109,6 +113,7 @@ namespace C868
             this.OrdersDGV.Location = new System.Drawing.Point(3, 3);
             this.OrdersDGV.MultiSelect = false;
             this.OrdersDGV.Name = "OrdersDGV";
+            this.OrdersDGV.ReadOnly = true;
             this.OrdersDGV.RowHeadersVisible = false;
             this.OrdersDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.OrdersDGV.Size = new System.Drawing.Size(1145, 441);
@@ -116,6 +121,8 @@ namespace C868
             // 
             // InventoryTab
             // 
+            this.InventoryTab.Controls.Add(this.SearchProductText);
+            this.InventoryTab.Controls.Add(this.label2);
             this.InventoryTab.Controls.Add(this.UpdateProdBtn);
             this.InventoryTab.Controls.Add(this.NewProdBtn);
             this.InventoryTab.Controls.Add(this.InventoryDGV);
@@ -194,44 +201,63 @@ namespace C868
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
-            // SearchBtn
+            // SearchCustText
             // 
-            this.SearchBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.SearchBtn.Location = new System.Drawing.Point(951, 16);
-            this.SearchBtn.Name = "SearchBtn";
-            this.SearchBtn.Size = new System.Drawing.Size(95, 26);
-            this.SearchBtn.TabIndex = 4;
-            this.SearchBtn.Text = "Search";
-            this.SearchBtn.UseVisualStyleBackColor = true;
+            this.SearchCustText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.SearchCustText.Location = new System.Drawing.Point(849, 463);
+            this.SearchCustText.Name = "SearchCustText";
+            this.SearchCustText.Size = new System.Drawing.Size(294, 26);
+            this.SearchCustText.TabIndex = 5;
+            this.SearchCustText.TextChanged += new System.EventHandler(this.SearchText_TextChanged);
             // 
-            // SearchText
+            // label1
             // 
-            this.SearchText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.SearchText.Location = new System.Drawing.Point(698, 16);
-            this.SearchText.Name = "SearchText";
-            this.SearchText.Size = new System.Drawing.Size(247, 26);
-            this.SearchText.TabIndex = 5;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(662, 463);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(181, 24);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Search by Customer";
+            // 
+            // SearchProductText
+            // 
+            this.SearchProductText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.SearchProductText.Location = new System.Drawing.Point(849, 461);
+            this.SearchProductText.Name = "SearchProductText";
+            this.SearchProductText.Size = new System.Drawing.Size(294, 26);
+            this.SearchProductText.TabIndex = 7;
+            this.SearchProductText.TextChanged += new System.EventHandler(this.SearchProductText_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(678, 461);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(165, 24);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Search by Product";
             // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1159, 620);
-            this.Controls.Add(this.SearchText);
-            this.Controls.Add(this.SearchBtn);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ExitBtn);
             this.Controls.Add(this.tabControl1);
             this.Name = "Dashboard";
-            this.Text = "Skin Strategy Inventory Manager";
+            this.Text = "Skin StrateG Inventory Manager";
             this.tabControl1.ResumeLayout(false);
             this.OrdersTab.ResumeLayout(false);
+            this.OrdersTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OrdersDGV)).EndInit();
             this.InventoryTab.ResumeLayout(false);
+            this.InventoryTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InventoryDGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -248,9 +274,11 @@ namespace C868
         private System.Windows.Forms.Button NewProdBtn;
         private System.Windows.Forms.DataGridView InventoryDGV;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button SearchBtn;
-        private System.Windows.Forms.TextBox SearchText;
+        private System.Windows.Forms.TextBox SearchCustText;
         private System.Windows.Forms.TabPage ReportsTab;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox SearchProductText;
+        private System.Windows.Forms.Label label2;
     }
 }
 
