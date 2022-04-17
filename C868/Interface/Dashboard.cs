@@ -18,7 +18,7 @@ namespace C868
         private DataTable inventoryDataTable = new DataTable();
         private DataTable ordersDataTable = new DataTable();
 
-        public Dashboard(string dbPath)
+        public Dashboard()
         {
             InitializeComponent();
             DGVrefresh();
@@ -29,7 +29,7 @@ namespace C868
             inventoryDataTable.Clear();
             ordersDataTable.Clear();
 
-            SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
+            SQLiteConnection conn = new SQLiteConnection(Program.LoadConnectionString());
             conn.Open();
 
             string query1 = "SELECT * FROM Product";

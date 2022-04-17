@@ -34,7 +34,7 @@ namespace C868
         {
             OrderDateTimePicker.Value = DateTime.Now;
 
-            SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
+            SQLiteConnection conn = new SQLiteConnection(Program.LoadConnectionString());
             conn.Open();
 
             if (newOrder == false)
@@ -88,7 +88,7 @@ namespace C868
             {
                 int currentOrderId = Convert.ToInt32(OrderIdText.Text);
 
-                SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
+                SQLiteConnection conn = new SQLiteConnection(Program.LoadConnectionString());
                 conn.Open();
 
                 string query1 =
@@ -117,7 +117,7 @@ namespace C868
 
             Product loadProd = null;
 
-            SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
+            SQLiteConnection conn = new SQLiteConnection(Program.LoadConnectionString());
             conn.Open();
 
             string query1 = "SELECT ProdId, ProdName, ProdPrice, ProdSKU, Quantity FROM Product";
@@ -225,7 +225,7 @@ namespace C868
         {
             int currentOrderId = Convert.ToInt32(OrderIdText.Text);
 
-            SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
+            SQLiteConnection conn = new SQLiteConnection(Program.LoadConnectionString());
             conn.Open();
 
             string query1 = "DELETE FROM Orders WHERE OrderId = @ID";
@@ -251,7 +251,7 @@ namespace C868
             List<QtyByProductId> newCartPlusOldCart = new List<QtyByProductId>();
             QtyByProductId UpdatedItem = null;
 
-            SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
+            SQLiteConnection conn = new SQLiteConnection(Program.LoadConnectionString());
             conn.Open();
 
             if (newOrder == true)
@@ -366,7 +366,7 @@ namespace C868
                 string custEmail = CustEmailText.Text;
                 DateTime orderDate = OrderDateTimePicker.Value;
 
-                SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
+                SQLiteConnection conn = new SQLiteConnection(Program.LoadConnectionString());
                 conn.Open();
 
                 if (newOrder == true)

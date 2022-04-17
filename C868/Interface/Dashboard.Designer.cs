@@ -264,6 +264,7 @@ namespace C868
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ExitBtn);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Dashboard";
             this.Text = "Skin StrateG Inventory Manager";
             this.tabControl1.ResumeLayout(false);

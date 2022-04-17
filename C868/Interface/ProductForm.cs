@@ -20,6 +20,17 @@ namespace C868
             newProd = isNew;
             InitializeComponent();
             LoadForm(prodId);
+
+            if (newProd == true)
+            {
+                QtyText.BackColor = Color.White;
+                QtyText.ReadOnly = false;
+            }
+            else
+            {
+                QtyText.BackColor = Color.LightGray;
+                QtyText.ReadOnly = true;
+            }
         }
 
         private void LoadForm(int prodId)
@@ -28,7 +39,7 @@ namespace C868
             {
                 Product loadProd = null;
 
-                SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
+                SQLiteConnection conn = new SQLiteConnection(Program.LoadConnectionString());
                 conn.Open();
 
                 string query1 = "SELECT ProdId, ProdName, ProdPrice, ProdSKU, Quantity FROM Product WHERE ProdId = @ID";
@@ -74,7 +85,7 @@ namespace C868
         {
             int prodId = Convert.ToInt32(ProdIdText.Text);
 
-            SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
+            SQLiteConnection conn = new SQLiteConnection(Program.LoadConnectionString());
             conn.Open();
 
             string query1 = "DELETE FROM Product WHERE ProdId = @ID";
@@ -118,7 +129,7 @@ namespace C868
                 return;
             }
 
-            SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
+            SQLiteConnection conn = new SQLiteConnection(Program.LoadConnectionString());
             conn.Open();
 
             if (newProd == true)

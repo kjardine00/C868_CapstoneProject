@@ -29,6 +29,7 @@ namespace C868
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdjustInventory));
             this.AddBtn = new System.Windows.Forms.Button();
             this.BackBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -124,6 +125,7 @@ namespace C868
             this.Controls.Add(this.label1);
             this.Controls.Add(this.AddBtn);
             this.Controls.Add(this.BackBtn);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AdjustInventory";
             this.Text = "Adjust Inventory";
             ((System.ComponentModel.ISupportInitialize)(this.AmountNumeric)).EndInit();

@@ -26,7 +26,7 @@ namespace C868
 
             Product loadProd = null;
 
-            SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
+            SQLiteConnection conn = new SQLiteConnection(Program.LoadConnectionString());
             conn.Open();
 
             string query1 = "SELECT ProdId, ProdName, ProdPrice, ProdSKU, Quantity FROM Product";
@@ -62,7 +62,7 @@ namespace C868
 
             Product prod = (Product)ProductComboBox.SelectedItem;
 
-            SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
+            SQLiteConnection conn = new SQLiteConnection(Program.LoadConnectionString());
             conn.Open();
 
             string query1 = "SELECT Quantity FROM Product WHERE ProdID = @pID";

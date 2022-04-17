@@ -8,13 +8,25 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		SkinStrateG Inventory Tracker|Any CPU = SkinStrateG Inventory Tracker|Any CPU
+		SkinStrateG Inventory Tracker|x64 = SkinStrateG Inventory Tracker|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{760F085C-573E-4EB7-8700-22C7F0297385}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{760F085C-573E-4EB7-8700-22C7F0297385}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{760F085C-573E-4EB7-8700-22C7F0297385}.Debug|x64.ActiveCfg = Debug|x64
+		{760F085C-573E-4EB7-8700-22C7F0297385}.Debug|x64.Build.0 = Debug|x64
 		{760F085C-573E-4EB7-8700-22C7F0297385}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{760F085C-573E-4EB7-8700-22C7F0297385}.Release|Any CPU.Build.0 = Release|Any CPU
+		{760F085C-573E-4EB7-8700-22C7F0297385}.Release|x64.ActiveCfg = Release|x64
+		{760F085C-573E-4EB7-8700-22C7F0297385}.Release|x64.Build.0 = Release|x64
+		{760F085C-573E-4EB7-8700-22C7F0297385}.SkinStrateG Inventory Tracker|Any CPU.ActiveCfg = SkinStrateG Inventory Tracker|Any CPU
+		{760F085C-573E-4EB7-8700-22C7F0297385}.SkinStrateG Inventory Tracker|Any CPU.Build.0 = SkinStrateG Inventory Tracker|Any CPU
+		{760F085C-573E-4EB7-8700-22C7F0297385}.SkinStrateG Inventory Tracker|x64.ActiveCfg = SkinStrateG Inventory Tracker|x64
+		{760F085C-573E-4EB7-8700-22C7F0297385}.SkinStrateG Inventory Tracker|x64.Build.0 = SkinStrateG Inventory Tracker|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

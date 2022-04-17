@@ -29,6 +29,7 @@ namespace C868
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrderForm));
             this.label1 = new System.Windows.Forms.Label();
             this.BackBtn = new System.Windows.Forms.Button();
             this.SaveBtn = new System.Windows.Forms.Button();
@@ -350,6 +351,7 @@ namespace C868
             this.Controls.Add(this.SaveBtn);
             this.Controls.Add(this.BackBtn);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "OrderForm";
             this.Text = "Order Details";
             ((System.ComponentModel.ISupportInitialize)(this.ProductCartDGV)).EndInit();
