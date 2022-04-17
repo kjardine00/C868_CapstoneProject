@@ -77,6 +77,7 @@ namespace C868
 
         private void LoadCart()
         {
+            cartDataTable.Clear();
             cartDataTable.Columns.Clear();
             if (!cartDataTable.Columns.Contains("ProdID")) { cartDataTable.Columns.Add("ProdID", typeof(int)); }
             if (!cartDataTable.Columns.Contains("ProdName")) { cartDataTable.Columns.Add("ProdName", typeof(string)); }
@@ -183,22 +184,20 @@ namespace C868
         {
             if (ProductCartDGV.RowCount > 0)
             {
-                int cartId = Convert.ToInt32(ProductCartDGV.SelectedRows[0].Cells[0].Value);
+                int cartItemId = Convert.ToInt32(ProductCartDGV.SelectedRows[0].Cells[0].Value);
 
-                SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
-                conn.Open();
-
-                string query0 = "DELETE FROM OrderItems WHERE EntryId = @cartId;";
-                SQLiteCommand cmd = new SQLiteCommand(query0, conn);
-                cmd.Parameters.AddWithValue("@cartId", cartId);
-
-                cmd.ExecuteNonQuery();
-
-                conn.Close();
+                foreach (DataRow row in cartDataTable.Rows)
+                {
+                    if (cartItemId == Convert.ToInt32(row["ProdId"]))
+                    {
+                        int updateQty = Convert.ToInt32(row["ProdQty"]) - 1;
+                        row["ProdQty"] = updateQty;
+                    }
+                }
             }
             else
             {
-                MessageBox.Show("This order's cart is already empty");
+                MessageBox.Show("Please select an Order you would like to update.");
             }
 
             UpdateTotal();
@@ -207,10 +206,10 @@ namespace C868
         private void UpdateTotal()
         {
             decimal subtotal = 0;
-            
+
             foreach (DataRow row in cartDataTable.Rows)
             {
-                subtotal = subtotal + Convert.ToDecimal(row["ProdPrice"]);
+                subtotal = subtotal + (Convert.ToDecimal(row["ProdPrice"]) * Convert.ToDecimal(row["ProdQty"]));
             }
 
             SubTotalText.Text = subtotal.ToString();
@@ -250,13 +249,14 @@ namespace C868
             QtyByProductId newQty = null;
             List<QtyByProductId> oldCart = new List<QtyByProductId>();
             List<QtyByProductId> newCartPlusOldCart = new List<QtyByProductId>();
+            QtyByProductId UpdatedItem = null;
 
             SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
             conn.Open();
 
             if (newOrder == true)
             {
-                foreach (DataRow row in cartDataTable.Rows)
+                foreach (DataRow row in cartDataTable.Rows) //Get ProdCurrentQTY - Cart
                 {
                     string query4 = "SELECT Quantity FROM Product WHERE ProdId = @pID";
                     SQLiteCommand cmd4 = new SQLiteCommand(query4, conn);
@@ -271,11 +271,9 @@ namespace C868
                     cmd2.ExecuteNonQuery();
                 }
             }
-            else //Trying to get when update an order to make the correct changes to the total amount of product available. 
+            else // if it is not a new order. ProdCurrentQTY = ProdCurrentQTY - (NewCart - OldCart)
             {
-                int qtyToBeSaved;
-
-                string query3 = "SELECT ProductId, ProdQty FROM OrderItems WHERE OrderId = @id";
+                string query3 = "SELECT ProductId, ProdQty FROM OrderItems WHERE OrderId = @id"; // OldCart
                 SQLiteCommand cmd3 = new SQLiteCommand(query3, conn);
                 cmd3.Parameters.AddWithValue("@id", orderId);
 
@@ -293,21 +291,43 @@ namespace C868
                     reader.Close();
                 }
 
-                foreach (DataRow row in cartDataTable.Rows)
+                foreach (DataRow row in cartDataTable.Rows) // (NewCart - OldCart)
                 {
-                    foreach(QtyByProductId qty in oldCart)
+                    foreach(QtyByProductId qty in oldCart) 
                     {
-                        if (qty.ProductId == Convert.ToInt32(row["ProductId"]))
+                        if (qty.ProductId == Convert.ToInt32(row["ProdId"]))
                         {
-
+                            int updateqty = Convert.ToInt32(row["ProdQty"]) - qty.ProdQty;
+                            UpdatedItem = new QtyByProductId(qty.ProductId, updateqty);
+                            newCartPlusOldCart.Add(UpdatedItem);
+                        }
+                        else
+                        {
+                            UpdatedItem = new QtyByProductId(qty.ProductId, Convert.ToInt32(row["ProdQty"]));
+                            newCartPlusOldCart.Add(UpdatedItem);
                         }
                     }
                 }
             }
-            
-            // CurrentQTY = CurrentQTY - (NewCart - OldCart)
 
-            string query0 = "DELETE FROM OrderItems WHERE OrderId = @ID";
+            foreach (QtyByProductId item in newCartPlusOldCart) // UpdateQty = CurrentQTY - (NewCart - OldCart)
+            {
+                string query5 = "SELECT Quantity FROM Product WHERE ProdId = @pID";
+                SQLiteCommand cmd5 = new SQLiteCommand(query5, conn);
+                cmd5.Parameters.AddWithValue("@pID", item.ProductId);
+
+                int CurrentQTY = Convert.ToInt32(cmd5.ExecuteScalar());
+                int NewMinusOld = item.ProdQty;
+                int UpdateQty = CurrentQTY - NewMinusOld;
+
+                string query6 = "UPDATE Product SET Quantity = @qty WHERE ProdId = @pId";
+                SQLiteCommand cmd6 = new SQLiteCommand(query6, conn);
+                cmd6.Parameters.AddWithValue("@qty", UpdateQty);
+                cmd6.Parameters.AddWithValue("@pId", item.ProductId);
+                cmd6.ExecuteNonQuery();
+            }
+
+            string query0 = "DELETE FROM OrderItems WHERE OrderId = @ID"; //Drops old cart and adds new cart in OrderItems Database
             SQLiteCommand cmd0 = new SQLiteCommand(query0, conn);
             cmd0.Parameters.AddWithValue("@ID", orderId);
             cmd0.ExecuteNonQuery();
@@ -387,7 +407,7 @@ namespace C868
                         "WHERE OrderId = @ID";
                     SQLiteCommand cmd1 = new SQLiteCommand(query1, conn);
                     cmd1.Parameters.AddWithValue("@ID", orderId);
-                    cmd1.Parameters.AddWithValue("@date", orderId);
+                    cmd1.Parameters.AddWithValue("@date", orderDate);
                     cmd1.Parameters.AddWithValue("@name", custName);
                     cmd1.Parameters.AddWithValue("@phone", custPhone);
                     cmd1.Parameters.AddWithValue("@email", custEmail);

@@ -22,12 +22,13 @@ namespace C868
         {
             InitializeComponent();
             DGVrefresh();
-
-            
         }
 
         private void DGVrefresh()
         {
+            inventoryDataTable.Clear();
+            ordersDataTable.Clear();
+
             SQLiteConnection conn = new SQLiteConnection(Program.connectionString);
             conn.Open();
 
@@ -124,6 +125,7 @@ namespace C868
         private void AddInventoryBtn_Click(object sender, EventArgs e)
         {
             new AdjustInventory().ShowDialog();
+            DGVrefresh();
         }
     }
 }
