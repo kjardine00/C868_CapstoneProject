@@ -10,11 +10,8 @@ namespace C868
 {
     static class Program
     {
-        public static string connectionString = @"Data source = C:\VS Projects\C868\db.db";
+        //public static string connectionString = @"Data source = C:\VS Projects\C868\db.db";
 
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {

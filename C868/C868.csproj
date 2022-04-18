@@ -15,7 +15,8 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <PublishUrl>publish\</PublishUrl>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\kjard\Desktop\App\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -25,10 +26,10 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -78,6 +79,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'SkinStrateG Inventory Tracker|x64'">
     <PlatformTarget>x64</PlatformTarget>
     <OutputPath>bin\x64\SkinStrateG Inventory Tracker\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>BAFE2981EB22D615A8DBFEAE127D2081472FC92A</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>C868_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -139,11 +156,28 @@
       <DependentUpon>ProductForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\QtyByProductId.cs" />
+    <Compile Include="ReportForms\MoneyByDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForms\MoneyByDate.Designer.cs">
+      <DependentUpon>MoneyByDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForms\OrderByDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForms\OrderByDate.Designer.cs">
+      <DependentUpon>OrderByDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForms\ProductsByDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForms\ProductsByDate.Designer.cs">
+      <DependentUpon>ProductsByDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Skin StrateG Horizontal 299p x 62p %281%29.ico" />
-    <None Include="Resources\Icon1.ico" />
-    <None Include="Resources\IconImage.png" />
+    <None Include="Properties\app.manifest" />
     <EmbeddedResource Include="Interface\AdjustInventory.resx">
       <DependentUpon>AdjustInventory.cs</DependentUpon>
     </EmbeddedResource>
@@ -155,6 +189,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Interface\ProductForm.resx">
       <DependentUpon>ProductForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForms\MoneyByDate.resx">
+      <DependentUpon>MoneyByDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForms\OrderByDate.resx">
+      <DependentUpon>OrderByDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForms\ProductsByDate.resx">
+      <DependentUpon>ProductsByDate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -195,6 +238,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

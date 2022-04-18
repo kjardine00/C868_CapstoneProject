@@ -47,11 +47,15 @@ namespace C868
             this.ReportsTab = new System.Windows.Forms.TabPage();
             this.ExitBtn = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.OrdersByMonth = new System.Windows.Forms.Button();
+            this.RevenueByMonth = new System.Windows.Forms.Button();
+            this.ProductsSoldByDate = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.OrdersTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OrdersDGV)).BeginInit();
             this.InventoryTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InventoryDGV)).BeginInit();
+            this.ReportsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -227,6 +231,9 @@ namespace C868
             // 
             // ReportsTab
             // 
+            this.ReportsTab.Controls.Add(this.ProductsSoldByDate);
+            this.ReportsTab.Controls.Add(this.RevenueByMonth);
+            this.ReportsTab.Controls.Add(this.OrdersByMonth);
             this.ReportsTab.Location = new System.Drawing.Point(4, 33);
             this.ReportsTab.Name = "ReportsTab";
             this.ReportsTab.Padding = new System.Windows.Forms.Padding(3);
@@ -256,6 +263,39 @@ namespace C868
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
+            // OrdersByMonth
+            // 
+            this.OrdersByMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OrdersByMonth.Location = new System.Drawing.Point(17, 17);
+            this.OrdersByMonth.Name = "OrdersByMonth";
+            this.OrdersByMonth.Size = new System.Drawing.Size(199, 50);
+            this.OrdersByMonth.TabIndex = 7;
+            this.OrdersByMonth.Text = "Orders By Month";
+            this.OrdersByMonth.UseVisualStyleBackColor = true;
+            this.OrdersByMonth.Click += new System.EventHandler(this.OrdersByMonth_Click);
+            // 
+            // RevenueByMonth
+            // 
+            this.RevenueByMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RevenueByMonth.Location = new System.Drawing.Point(17, 73);
+            this.RevenueByMonth.Name = "RevenueByMonth";
+            this.RevenueByMonth.Size = new System.Drawing.Size(199, 50);
+            this.RevenueByMonth.TabIndex = 8;
+            this.RevenueByMonth.Text = "Revenue By Month";
+            this.RevenueByMonth.UseVisualStyleBackColor = true;
+            this.RevenueByMonth.Click += new System.EventHandler(this.RevenueByMonth_Click);
+            // 
+            // ProductsSoldByDate
+            // 
+            this.ProductsSoldByDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProductsSoldByDate.Location = new System.Drawing.Point(17, 129);
+            this.ProductsSoldByDate.Name = "ProductsSoldByDate";
+            this.ProductsSoldByDate.Size = new System.Drawing.Size(199, 50);
+            this.ProductsSoldByDate.TabIndex = 9;
+            this.ProductsSoldByDate.Text = "Products Sold by Date";
+            this.ProductsSoldByDate.UseVisualStyleBackColor = true;
+            this.ProductsSoldByDate.Click += new System.EventHandler(this.ProductsSoldByDate_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -274,6 +314,7 @@ namespace C868
             this.InventoryTab.ResumeLayout(false);
             this.InventoryTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InventoryDGV)).EndInit();
+            this.ReportsTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -298,6 +339,9 @@ namespace C868
         private System.Windows.Forms.TextBox SearchProductText;
         private System.Windows.Forms.Button AdjustInventoryBtn;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button ProductsSoldByDate;
+        private System.Windows.Forms.Button RevenueByMonth;
+        private System.Windows.Forms.Button OrdersByMonth;
     }
 }
 

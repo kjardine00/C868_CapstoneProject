@@ -24,5 +24,10 @@ namespace C868.Models
             CustEmail = cEmail;
             OrderTotal = oTotal;
         }
+
+        public string orderDateToMonthYear()
+        {
+            return OrderDate.ToString("MMMM yyyy");
+        }
     }
 }

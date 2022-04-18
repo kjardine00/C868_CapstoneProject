@@ -22,6 +22,9 @@ namespace C868
         {
             InitializeComponent();
             DGVrefresh();
+
+            this.InventoryDGV.Columns[0].Visible = false;
+            this.OrdersDGV.Columns[0].Visible = false;
         }
 
         private void DGVrefresh()
@@ -126,6 +129,21 @@ namespace C868
         {
             new AdjustInventory().ShowDialog();
             DGVrefresh();
+        }
+
+        private void OrdersByMonth_Click(object sender, EventArgs e)
+        {
+            new OrderByDate().Show();
+        }
+
+        private void RevenueByMonth_Click(object sender, EventArgs e)
+        {
+            new MoneyByDate().Show();
+        }
+
+        private void ProductsSoldByDate_Click(object sender, EventArgs e)
+        {
+            new ProductsByDate().Show();
         }
     }
 }

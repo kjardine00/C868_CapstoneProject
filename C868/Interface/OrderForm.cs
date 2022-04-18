@@ -28,6 +28,8 @@ namespace C868
             LoadForm(oId);
             LoadCart();
             LoadPicker();
+
+            
         }
 
         private void LoadForm(int ordID)
