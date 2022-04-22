@@ -46,7 +46,7 @@ namespace C868
             this.ReportDGV.Name = "ReportDGV";
             this.ReportDGV.ReadOnly = true;
             this.ReportDGV.RowHeadersVisible = false;
-            this.ReportDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.ReportDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ReportDGV.Size = new System.Drawing.Size(800, 401);
             this.ReportDGV.TabIndex = 16;
             // 

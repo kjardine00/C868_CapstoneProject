@@ -30,20 +30,25 @@ namespace C868
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoneyByDate));
-            this.ReportDGV = new System.Windows.Forms.DataGridView();
+            this.ReportDGVMoneyByDate = new System.Windows.Forms.DataGridView();
             this.BackBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.ReportDGV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ReportDGVMoneyByDate)).BeginInit();
             this.SuspendLayout();
             // 
-            // ReportDGV
+            // ReportDGVMoneyByDate
             // 
-            this.ReportDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ReportDGV.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ReportDGV.Location = new System.Drawing.Point(0, 49);
-            this.ReportDGV.Name = "ReportDGV";
-            this.ReportDGV.Size = new System.Drawing.Size(800, 401);
-            this.ReportDGV.TabIndex = 16;
+            this.ReportDGVMoneyByDate.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.ReportDGVMoneyByDate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ReportDGVMoneyByDate.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ReportDGVMoneyByDate.Location = new System.Drawing.Point(0, 49);
+            this.ReportDGVMoneyByDate.MultiSelect = false;
+            this.ReportDGVMoneyByDate.Name = "ReportDGVMoneyByDate";
+            this.ReportDGVMoneyByDate.ReadOnly = true;
+            this.ReportDGVMoneyByDate.RowHeadersVisible = false;
+            this.ReportDGVMoneyByDate.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.ReportDGVMoneyByDate.Size = new System.Drawing.Size(800, 401);
+            this.ReportDGVMoneyByDate.TabIndex = 16;
             // 
             // BackBtn
             // 
@@ -70,13 +75,13 @@ namespace C868
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.ReportDGV);
+            this.Controls.Add(this.ReportDGVMoneyByDate);
             this.Controls.Add(this.BackBtn);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MoneyByDate";
             this.Text = "MoneyByDate";
-            ((System.ComponentModel.ISupportInitialize)(this.ReportDGV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ReportDGVMoneyByDate)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -84,7 +89,7 @@ namespace C868
 
         #endregion
 
-        private System.Windows.Forms.DataGridView ReportDGV;
+        private System.Windows.Forms.DataGridView ReportDGVMoneyByDate;
         private System.Windows.Forms.Button BackBtn;
         private System.Windows.Forms.Label label1;
     }
