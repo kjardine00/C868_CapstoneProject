@@ -108,10 +108,14 @@ namespace C868
             // 
             // ReportDGV
             // 
+            this.ReportDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.ReportDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ReportDGV.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.ReportDGV.Location = new System.Drawing.Point(0, 77);
+            this.ReportDGV.MultiSelect = false;
             this.ReportDGV.Name = "ReportDGV";
+            this.ReportDGV.ReadOnly = true;
+            this.ReportDGV.RowHeadersVisible = false;
             this.ReportDGV.Size = new System.Drawing.Size(800, 373);
             this.ReportDGV.TabIndex = 8;
             // 
