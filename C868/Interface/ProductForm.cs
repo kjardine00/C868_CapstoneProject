@@ -58,7 +58,7 @@ namespace C868
                             Convert.ToInt32(reader["Quantity"])
                             );
 
-                        ProdIdText.Text = loadProd.ProdID.ToString();
+                        ProdIdText.Text = loadProd.ProductId.ToString();
                         ProdNameText.Text = loadProd.ProdName;
                         ProdPriceText.Text = loadProd.ProdPrice.ToString();
                         ProdSKUText.Text = loadProd.ProdSKU;

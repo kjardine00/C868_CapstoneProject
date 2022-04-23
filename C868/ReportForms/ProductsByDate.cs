@@ -62,7 +62,7 @@ namespace C868
             Product product = (Product)ProductPicker.SelectedItem;
             DataTable ProductsByDate = new DataTable();
 
-            int ProdID = product.ProdID;
+            int ProdID = product.ProductId;
             DateTime start = StartDateTimePicker.Value;
             DateTime end = EndDateTimePicker.Value;
 

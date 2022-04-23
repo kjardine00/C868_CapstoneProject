@@ -67,13 +67,13 @@ namespace C868
 
             string query1 = "SELECT Quantity FROM Product WHERE ProdID = @pID";
             SQLiteCommand cmd1 = new SQLiteCommand(query1, conn);
-            cmd1.Parameters.AddWithValue("@pID", prod.ProdID);
+            cmd1.Parameters.AddWithValue("@pID", prod.ProductId);
 
             int updateQty = Convert.ToInt32(cmd1.ExecuteScalar()) + qtyToAdd;
 
             string query0 = "UPDATE Product SET Quantity = @qty WHERE ProdId = @pID";
             SQLiteCommand cmd0 = new SQLiteCommand(query0, conn);
-            cmd0.Parameters.AddWithValue("@pID", prod.ProdID);
+            cmd0.Parameters.AddWithValue("@pID", prod.ProductId);
             cmd0.Parameters.AddWithValue("@qty", updateQty);
 
             cmd0.ExecuteNonQuery();

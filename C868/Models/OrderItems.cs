@@ -6,19 +6,17 @@ using System.Threading.Tasks;
 
 namespace C868.Models
 {
-    public class OrderItems
+    public class OrderItems : QtyByProductId
     {
         public int ItemId { get; set; }
         public int OrderId { get; set; }
-        public int ProductId { get; set; }
-        public int ProdQty { get; set; }
 
-        public OrderItems(int item, int order, int product, int qty)
+        public OrderItems(int item, int order, int pID, int qty) : base (pID, qty)
         {
             ItemId = item;
             OrderId = order;
-            ProductId = product;
-            ProdQty = qty;
+            ProductId = pID;
+            Quantity = qty;
         }
     }
 }

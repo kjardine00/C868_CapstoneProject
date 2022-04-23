@@ -9,12 +9,12 @@ namespace C868.Models
     public class QtyByProductId
     {
         public int ProductId { get; set; }
-        public int ProdQty { get; set; }
+        public int Quantity { get; set; }
 
         public QtyByProductId(int product, int qty)
         {
             ProductId = product;
-            ProdQty = qty;
+            Quantity = qty;
         }
     }
 }

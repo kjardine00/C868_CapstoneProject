@@ -164,7 +164,7 @@ namespace C868
             {
                 int existProd = (int)row["ProdId"];
 
-                if (prod.ProdID == existProd)
+                if (prod.ProductId == existProd)
                 {
                     int qty = (int)row["ProdQty"];
                     qty++;
@@ -175,7 +175,7 @@ namespace C868
 
             if (exists == false)
             {
-                cartDataTable.Rows.Add(prod.ProdID, prod.ProdName, prod.ProdPrice, 1);
+                cartDataTable.Rows.Add(prod.ProductId, prod.ProdName, prod.ProdPrice, 1);
             }
 
             ProductCartDGV.DataSource = cartDataTable;
@@ -299,7 +299,7 @@ namespace C868
                     {
                         if (qty.ProductId == Convert.ToInt32(row["ProdId"]))
                         {
-                            int updateqty = Convert.ToInt32(row["ProdQty"]) - qty.ProdQty;
+                            int updateqty = Convert.ToInt32(row["ProdQty"]) - qty.Quantity;
                             UpdatedItem = new QtyByProductId(qty.ProductId, updateqty);
                             newCartPlusOldCart.Add(UpdatedItem);
                         }
@@ -319,7 +319,7 @@ namespace C868
                 cmd5.Parameters.AddWithValue("@pID", item.ProductId);
 
                 int CurrentQTY = Convert.ToInt32(cmd5.ExecuteScalar());
-                int NewMinusOld = item.ProdQty;
+                int NewMinusOld = item.Quantity;
                 int UpdateQty = CurrentQTY - NewMinusOld;
 
                 string query6 = "UPDATE Product SET Quantity = @qty WHERE ProdId = @pId";
